@@ -1,0 +1,2815 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Prime Markets Bank & Crypto Pro</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        prime: {
+                            bg: '#05070a',
+                            surface: '#0B0E14',
+                            card: '#12161F',
+                            cardHover: '#1A202C',
+                            accent: '#0ECB81',
+                            accentHover: '#10D88B',
+                            gold: '#F0B90B',
+                            danger: '#F6465D',
+                            border: 'rgba(255, 255, 255, 0.08)',
+                            textMuted: '#848E9C'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif']
+                    },
+                    boxShadow: {
+                        'glow-emerald': '0 0 25px -5px rgba(14, 203, 129, 0.3)',
+                        'glow-red': '0 0 25px -5px rgba(246, 70, 93, 0.3)',
+                        'glow-card': '0 10px 30px -10px rgba(0, 0, 0, 0.7)'
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- TradingView Script CDN -->
+    <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #05070a;
+            color: #f1f5f9;
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+        }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0B0E14;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1A202C;
+            border-radius: 9999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #0ECB81;
+        }
+
+        /* Glassmorphism Effect */
+        .glass-panel {
+            background: rgba(18, 22, 31, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        @keyframes pulseGain {
+            0%, 100% { background-color: rgba(14, 203, 129, 0.05); }
+            50% { background-color: rgba(14, 203, 129, 0.25); }
+        }
+        @keyframes pulseLoss {
+            0%, 100% { background-color: rgba(246, 70, 93, 0.05); }
+            50% { background-color: rgba(246, 70, 93, 0.25); }
+        }
+        .flash-gain { animation: pulseGain 0.6s ease-in-out; }
+        .flash-loss { animation: pulseLoss 0.6s ease-in-out; }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-6px); }
+            40%, 80% { transform: translateX(6px); }
+        }
+        .shake-err { animation: shake 0.35s ease-in-out; }
+    </style>
+</head>
+<body class="bg-[#05070a] text-gray-100 min-h-screen flex flex-col justify-between overflow-x-hidden">
+
+    <div class="w-full min-h-screen flex flex-col lg:flex-row max-w-[1600px] mx-auto relative bg-[#0B0E14] lg:shadow-2xl lg:border-x lg:border-gray-800/80">
+
+        <!-- ==================== DESKTOP SIDEBAR NAVIGATION ==================== -->
+        <aside class="hidden lg:flex flex-col w-72 bg-[#0B0E14] border-r border-gray-800/80 p-5 justify-between shrink-0 sticky top-0 h-screen z-30">
+            <div class="space-y-6">
+                <!-- Logo & Brand Header -->
+                <div class="flex items-center justify-between pb-4 border-b border-gray-800/80">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-2xl bg-gradient-to-br from-emerald-400 to-teal-700 flex items-center justify-center text-black font-black text-xl shadow-lg shadow-emerald-500/20">
+                            P
+                        </div>
+                        <div>
+                            <span class="text-base font-extrabold tracking-wider text-white block leading-none">PRIME</span>
+                            <span class="text-[9px] font-bold text-emerald-400 tracking-[0.2em] uppercase">Private Banking</span>
+                        </div>
+                    </div>
+                    <span class="text-[9px] bg-emerald-500/10 text-emerald-400 font-bold px-2 py-0.5 rounded-full border border-emerald-500/20">
+                        PRO
+                    </span>
+                </div>
+
+                <!-- Perfil Rápido -->
+                <div class="p-3 bg-[#12161F] rounded-2xl border border-gray-800/80 flex items-center gap-3">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80" 
+                             alt="User Profile" 
+                             class="w-10 h-10 rounded-xl object-cover border border-emerald-500/40"
+                             onerror="this.src='https://placehold.co/100x100/12161F/0ECB81?text=PRO'">
+                        <span class="absolute -bottom-1 -right-1 bg-emerald-500 text-black font-black text-[7px] px-1 rounded-full border border-[#0B0E14]">
+                            VIP
+                        </span>
+                    </div>
+                    <div class="overflow-hidden">
+                        <div class="text-xs font-bold text-white truncate" id="dt-user-name">Alexandre V. Rocha</div>
+                        <div class="text-[10px] text-emerald-400 font-medium truncate">Conta Verificada Pro</div>
+                    </div>
+                </div>
+
+                <!-- Navegação Principal Desktop -->
+                <nav class="space-y-1.5 text-xs font-semibold">
+                    <button onclick="navSwitchTo('home')" id="nav-item-home" class="w-full flex items-center gap-3 px-3.5 py-3 rounded-2xl text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 font-bold transition">
+                        <i class="fa-solid fa-house text-sm"></i>
+                        <span>Visão Geral / Início</span>
+                    </button>
+
+                    <button onclick="navSwitchTo('markets')" id="nav-item-markets" class="w-full flex items-center gap-3 px-3.5 py-3 rounded-2xl text-gray-400 hover:text-white hover:bg-[#12161F] transition">
+                        <i class="fa-solid fa-chart-line text-sm"></i>
+                        <span>Terminal Trading & Mercados</span>
+                    </button>
+
+                    <button onclick="navSwitchTo('movements')" id="nav-item-movements" class="w-full flex items-center gap-3 px-3.5 py-3 rounded-2xl text-gray-400 hover:text-white hover:bg-[#12161F] transition">
+                        <i class="fa-solid fa-clock-rotate-left text-sm"></i>
+                        <span>Extrato & Movimentos</span>
+                    </button>
+
+                    <button onclick="showIBANModal()" class="w-full flex items-center gap-3 px-3.5 py-3 rounded-2xl text-gray-400 hover:text-white hover:bg-[#12161F] transition">
+                        <i class="fa-solid fa-credit-card text-sm"></i>
+                        <span>Dados da Conta / IBAN</span>
+                    </button>
+                </nav>
+
+                <!-- Atalhos -->
+                <div class="pt-4 border-t border-gray-800/80 space-y-2">
+                    <button onclick="showDepositModal()" class="w-full bg-emerald-500 hover:bg-emerald-400 text-black font-extrabold py-2.5 rounded-xl text-xs transition shadow flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-circle-arrow-down"></i>
+                        <span>Depositar Fundos</span>
+                    </button>
+                    <button onclick="showTransferModal()" class="w-full bg-[#12161F] hover:bg-[#1A202C] text-gray-200 font-bold py-2.5 rounded-xl text-xs border border-gray-800 transition flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-paper-plane text-emerald-400"></i>
+                        <span>Transferir</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Rodapé Sidebar -->
+            <div class="pt-4 border-t border-gray-800/80 text-[10px] text-gray-500 flex items-center justify-between">
+                <span><i class="fa-solid fa-shield-halved text-emerald-400 mr-1"></i> SSL 256-Bit</span>
+                <span>v4.2 Pro</span>
+            </div>
+        </aside>
+
+        <!-- ==================== TELA DE LOGIN OVERLAY ==================== -->
+        <div id="login-screen" class="fixed inset-0 z-50 bg-[#0B0E14] flex items-center justify-center p-4 overflow-y-auto transition-all duration-500">
+            <div class="w-full max-w-md bg-[#12161F] border border-gray-800 rounded-3xl p-6 lg:p-8 shadow-2xl relative">
+                
+                <div class="flex items-center justify-between mb-6">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-400 to-teal-700 flex items-center justify-center text-black font-black text-xl shadow-lg shadow-emerald-500/20">
+                            P
+                        </div>
+                        <div>
+                            <span class="text-lg font-extrabold tracking-wider text-white block leading-none">PRIME</span>
+                            <span class="text-[9px] font-bold text-emerald-400 tracking-[0.2em] uppercase">Private Bank</span>
+                        </div>
+                    </div>
+                    <span class="text-[10px] bg-emerald-500/10 text-emerald-400 font-bold px-2.5 py-1 rounded-full border border-emerald-500/20">
+                        <i class="fa-solid fa-shield-halved mr-1"></i> Encriptado
+                    </span>
+                </div>
+
+                <div class="mb-6">
+                    <h1 class="text-xl lg:text-2xl font-black text-white mb-1 tracking-tight">Portal Financeiro Seguro</h1>
+                    <p class="text-xs text-gray-400">Aceda à sua conta de investimentos e homebanking com total proteção.</p>
+                </div>
+
+                <p id="auth-msg" class="hidden"></p>
+
+                <form id="login-form" class="space-y-4" onsubmit="handleLogin(event)">
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-400 mb-1.5 uppercase tracking-wider">Identificador / E-mail</label>
+                        <div class="relative">
+                            <span class="absolute left-4 top-3.5 text-gray-500"><i class="fa-regular fa-envelope"></i></span>
+                            <input 
+                                type="text" 
+                                id="login-email" 
+                                value="alexandre.rocha@primebank.com"
+                                placeholder="exemplo@primebank.com" 
+                                required
+                                class="w-full pl-11 pr-4 py-3.5 text-sm bg-[#0B0E14] border border-gray-800 rounded-2xl text-white placeholder-gray-600 focus:outline-none focus:border-emerald-500 transition shadow-inner"
+                            >
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-400 mb-1.5 uppercase tracking-wider">Palavra-passe</label>
+                        <div class="relative">
+                            <span class="absolute left-4 top-3.5 text-gray-500"><i class="fa-solid fa-lock"></i></span>
+                            <input 
+                                type="password" 
+                                id="login-password" 
+                                value="password123"
+                                placeholder="••••••••••••" 
+                                required
+                                class="w-full pl-11 pr-11 py-3.5 text-sm bg-[#0B0E14] border border-gray-800 rounded-2xl text-white placeholder-gray-600 focus:outline-none focus:border-emerald-500 transition shadow-inner"
+                            >
+                            <button type="button" onclick="togglePasswordVisibility()" class="absolute right-4 top-3.5 text-gray-500 hover:text-white transition">
+                                <i class="fa-regular fa-eye" id="password-toggle-icon"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between text-xs gap-2 pt-1">
+                        <label class="flex items-center gap-2 cursor-pointer text-gray-400 hover:text-gray-200">
+                            <input type="checkbox" checked class="rounded bg-gray-900 border-gray-700 text-emerald-500 focus:ring-0">
+                            <span>Lembrar sessão segura</span>
+                        </label>
+                        <button type="button" onclick="handleAccountRecoveryBypass()" class="text-emerald-400 font-semibold cursor-pointer hover:underline text-left sm:text-right">
+                            Recuperar Acesso Sem Bloqueio
+                        </button>
+                    </div>
+
+                    <button 
+                        type="submit" 
+                        class="w-full bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 active:scale-[0.98] text-black font-extrabold py-3.5 rounded-2xl text-sm transition shadow-lg shadow-emerald-500/25 mt-6 flex items-center justify-center gap-2">
+                        <span>Entrar no Banco Pro</span>
+                        <i class="fa-solid fa-shield-halved text-xs"></i>
+                    </button>
+                </form>
+
+                <div id="login-extras" class="mt-6 text-center">
+                    <button type="button" onclick="handleBiometricLogin()" class="p-3 bg-[#0B0E14] hover:bg-[#1A202C] border border-gray-800 rounded-2xl text-emerald-400 text-xs font-semibold inline-flex items-center gap-2 transition w-full justify-center">
+                        <i class="fa-solid fa-fingerprint text-xl"></i>
+                        <span>Entrar com Face ID / Biometria Instantânea</span>
+                    </button>
+                    <button type="button" onclick="toggleAuthMode(true)" class="mt-4 text-xs text-gray-400 hover:text-white transition">
+                        Ainda não tem conta? <span class="text-emerald-400 font-semibold hover:underline">Criar conta</span>
+                    </button>
+                </div>
+
+                <form id="register-form" class="space-y-4 hidden" onsubmit="handleRegister(event)">
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-400 mb-1.5 uppercase tracking-wider">Nome completo</label>
+                        <div class="relative">
+                            <span class="absolute left-4 top-3.5 text-gray-500"><i class="fa-regular fa-user"></i></span>
+                            <input type="text" id="reg-name" placeholder="Ex.: Alexandre Vieira Rocha" required minlength="3" maxlength="100" autocomplete="name"
+                                class="w-full pl-11 pr-4 py-3.5 text-sm bg-[#0B0E14] border border-gray-800 rounded-2xl text-white placeholder-gray-600 focus:outline-none focus:border-emerald-500 transition shadow-inner">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-400 mb-1.5 uppercase tracking-wider">E-mail</label>
+                        <div class="relative">
+                            <span class="absolute left-4 top-3.5 text-gray-500"><i class="fa-regular fa-envelope"></i></span>
+                            <input type="email" id="reg-email" placeholder="exemplo@primebank.com" required autocomplete="email"
+                                class="w-full pl-11 pr-4 py-3.5 text-sm bg-[#0B0E14] border border-gray-800 rounded-2xl text-white placeholder-gray-600 focus:outline-none focus:border-emerald-500 transition shadow-inner">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-400 mb-1.5 uppercase tracking-wider">Telemóvel</label>
+                        <div class="relative">
+                            <span class="absolute left-4 top-3.5 text-gray-500"><i class="fa-solid fa-phone"></i></span>
+                            <input type="tel" id="reg-phone" placeholder="+351 912 345 678" required autocomplete="tel"
+                                class="w-full pl-11 pr-4 py-3.5 text-sm bg-[#0B0E14] border border-gray-800 rounded-2xl text-white placeholder-gray-600 focus:outline-none focus:border-emerald-500 transition shadow-inner">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-400 mb-1.5 uppercase tracking-wider">Palavra-passe</label>
+                        <div class="relative">
+                            <span class="absolute left-4 top-3.5 text-gray-500"><i class="fa-solid fa-lock"></i></span>
+                            <input type="password" id="reg-password" placeholder="Mínimo 8 caracteres" required minlength="8" autocomplete="new-password"
+                                class="w-full pl-11 pr-4 py-3.5 text-sm bg-[#0B0E14] border border-gray-800 rounded-2xl text-white placeholder-gray-600 focus:outline-none focus:border-emerald-500 transition shadow-inner">
+                        </div>
+                    </div>
+                    <button type="submit"
+                        class="w-full bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 active:scale-[0.98] text-black font-extrabold py-3.5 rounded-2xl text-sm transition shadow-lg shadow-emerald-500/25 mt-2 flex items-center justify-center gap-2">
+                        <span>Criar conta</span>
+                        <i class="fa-solid fa-user-plus text-xs"></i>
+                    </button>
+                    <div class="text-center">
+                        <button type="button" onclick="toggleAuthMode(false)" class="text-xs text-gray-400 hover:text-white transition">
+                            Já tem conta? <span class="text-emerald-400 font-semibold hover:underline">Entrar</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- ==================== ÁREA DE CONTEÚDO PRINCIPAL ==================== -->
+        <main class="flex-1 min-h-screen flex flex-col justify-between overflow-x-hidden relative">
+
+            <!-- ==================== TELA DE HISTÓRICO E MOVIMENTOS ==================== -->
+            <div id="movements-screen" class="hidden absolute inset-0 z-40 bg-[#0B0E14] flex flex-col justify-start overflow-y-auto transition-all duration-300">
+                <div class="p-4 lg:p-6 bg-[#12161F] border-b border-gray-800/80 flex items-center justify-between sticky top-0 z-10">
+                    <div class="flex items-center gap-3">
+                        <button onclick="closeMovementsScreen()" class="w-9 h-9 rounded-full bg-[#1A202C] flex items-center justify-center text-gray-300 hover:text-white transition border border-gray-700/50">
+                            <i class="fa-solid fa-chevron-left text-sm"></i>
+                        </button>
+                        <div>
+                            <h2 class="text-base lg:text-lg font-extrabold text-white leading-tight">Extrato & Movimentos</h2>
+                            <p class="text-[10px] lg:text-xs text-gray-400">Histórico de transferências e investimentos em tempo real</p>
+                        </div>
+                    </div>
+                    <button onclick="refreshMovementsList()" class="w-8 h-8 rounded-full bg-emerald-500/10 flex items-center justify-center text-emerald-400 hover:bg-emerald-500/20 transition">
+                        <i class="fa-solid fa-arrows-rotate text-xs"></i>
+                    </button>
+                </div>
+
+                <div class="p-4 lg:p-8 space-y-5 max-w-5xl mx-auto w-full">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="bg-[#12161F] p-4 lg:p-5 rounded-2xl border border-emerald-500/20 flex flex-col justify-between shadow-lg">
+                            <div class="flex items-center gap-2 text-emerald-400 text-xs font-semibold mb-1">
+                                <div class="w-7 h-7 rounded-lg bg-emerald-500/20 flex items-center justify-center">
+                                    <i class="fa-solid fa-arrow-down-left text-xs"></i>
+                                </div>
+                                <span>Entradas Totais</span>
+                            </div>
+                            <span id="total-entradas" class="text-xl lg:text-2xl font-black text-white font-mono">+ €0,00</span>
+                        </div>
+
+                        <div class="bg-[#12161F] p-4 lg:p-5 rounded-2xl border border-red-500/20 flex flex-col justify-between shadow-lg">
+                            <div class="flex items-center gap-2 text-red-400 text-xs font-semibold mb-1">
+                                <div class="w-7 h-7 rounded-lg bg-red-500/20 flex items-center justify-center">
+                                    <i class="fa-solid fa-arrow-up-right text-xs"></i>
+                                </div>
+                                <span>Saídas Totais</span>
+                            </div>
+                            <span id="total-saidas" class="text-xl lg:text-2xl font-black text-white font-mono">- €0,00</span>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center bg-[#12161F] p-1.5 rounded-2xl border border-gray-800 text-xs font-semibold max-w-md">
+                        <button onclick="filterMovements('todos')" id="tab-todos" class="flex-1 py-2.5 rounded-xl text-center bg-emerald-500 text-black font-extrabold transition shadow">
+                            Todos
+                        </button>
+                        <button onclick="filterMovements('entrada')" id="tab-entrada" class="flex-1 py-2.5 rounded-xl text-center text-gray-400 hover:text-white transition">
+                            Entradas
+                        </button>
+                        <button onclick="filterMovements('saida')" id="tab-saida" class="flex-1 py-2.5 rounded-xl text-center text-gray-400 hover:text-white transition">
+                            Saídas
+                        </button>
+                    </div>
+
+                    <div id="movements-list" class="space-y-3"></div>
+                </div>
+            </div>
+
+            <!-- ==================== TELA DE MERCADOS & TRADING PRO ==================== -->
+            <div id="markets-screen" class="hidden absolute inset-0 z-40 bg-[#0B0E14] flex flex-col justify-start overflow-y-auto transition-all duration-300">
+                
+                <div class="px-4 py-3 lg:px-6 lg:py-4 bg-[#12161F] border-b border-gray-800 flex items-center justify-between sticky top-0 z-20">
+                    <div class="flex items-center gap-3">
+                        <button onclick="closeMarketsScreen()" class="w-8 h-8 rounded-full bg-[#1A202C] flex items-center justify-center text-gray-300 hover:text-white transition border border-gray-700/50">
+                            <i class="fa-solid fa-chevron-left text-xs"></i>
+                        </button>
+                        <div>
+                            <h2 class="text-sm lg:text-base font-black text-white leading-none">Terminal Trading Pro</h2>
+                            <span class="text-[9px] lg:text-[10px] text-emerald-400 font-bold">Gráfico Real TradingView + P&L em Tempo Real</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-[10px] lg:text-xs font-mono font-bold text-gray-300 bg-[#1A202C] px-3 py-1.5 rounded-xl border border-gray-800">
+                            Saldo: <strong class="text-emerald-400" id="trading-balance-display">€1.000.000,00</strong>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="flex-1 p-3 lg:p-6 space-y-4 max-w-7xl mx-auto w-full">
+                    
+                    <!-- Abas Superiores de Categorias -->
+                    <div id="category-tabs" class="relative flex items-center gap-1 bg-[#12161F] p-1.5 rounded-2xl border border-gray-800 text-xs font-bold max-w-2xl overflow-x-auto no-scrollbar"></div>
+
+                    <!-- Pesquisa de ativos -->
+                    <div class="flex items-center gap-3">
+                        <div class="relative flex-1 max-w-sm">
+                            <span class="absolute inset-y-0 left-3.5 flex items-center text-gray-500 pointer-events-none">
+                                <i class="fa-solid fa-magnifying-glass text-xs leading-none"></i>
+                            </span>
+                            <input type="search" id="asset-search" oninput="onAssetSearch(this.value)" placeholder="Pesquisar ativo (ex.: BTC, Apple, Ouro)" autocomplete="off"
+                                style="user-select:text;-webkit-user-select:text;-webkit-appearance:none;appearance:none"
+                                class="block w-full h-10 pl-10 pr-3 text-xs leading-none bg-[#12161F] border border-gray-800 rounded-xl text-white placeholder-gray-600 focus:outline-none focus:border-emerald-500 transition">
+                        </div>
+                        <span id="asset-count" class="text-[10px] leading-none text-gray-500 font-semibold shrink-0"></span>
+                    </div>
+
+                    <!-- Seletor Horizontal de Ativos -->
+                    <div id="asset-selector-bar" class="relative flex items-center gap-2 overflow-x-auto no-scrollbar py-1 lg:flex-wrap lg:max-h-28 lg:overflow-y-auto"></div>
+
+                    <!-- Layout em Grelha Desktop -->
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-6">
+                        
+                        <!-- Coluna do Gráfico TradingView -->
+                        <div class="lg:col-span-8 space-y-4">
+                            <div class="bg-[#12161F] rounded-3xl border border-gray-800 p-4 lg:p-6 space-y-4 shadow-lg">
+                                
+                                <!-- Detalhes do Ativo -->
+                                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                                    <div class="flex items-center gap-3">
+                                        <div id="selected-asset-icon" class="w-12 h-12 rounded-2xl bg-orange-500/10 border border-orange-500/20 text-orange-400 flex items-center justify-center font-bold text-xl shrink-0">
+                                            <i class="fa-brands fa-bitcoin"></i>
+                                        </div>
+                                        <div>
+                                            <div class="flex items-center gap-2">
+                                                <h3 id="selected-asset-name" class="text-base lg:text-lg font-black text-white">Bitcoin / Euro</h3>
+                                                <span id="selected-asset-symbol" class="text-[10px] bg-gray-800 text-gray-300 px-2 py-0.5 rounded font-mono font-bold">BTC/EUR</span>
+                                            </div>
+                                            <div class="text-[11px] text-gray-400 flex items-center gap-2 mt-0.5">
+                                                <span>24h Máx: <strong class="text-gray-200 font-mono" id="asset-24h-high">82.100,00</strong></span>
+                                                <span>●</span>
+                                                <span>24h Mín: <strong class="text-gray-200 font-mono" id="asset-24h-low">79.800,00</strong></span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="text-left sm:text-right">
+                                        <div id="selected-asset-price" class="text-xl lg:text-2xl font-black text-white font-mono leading-tight">81.416,00 €</div>
+                                        <span id="selected-asset-change" class="text-xs font-bold text-emerald-400 bg-emerald-500/10 px-2.5 py-0.5 rounded-md inline-block mt-1">+2.45%</span>
+                                    </div>
+                                </div>
+
+                                <!-- Controlos do Gráfico (Timeframes + Tipo de Estilo) -->
+                                <div class="flex flex-wrap items-center justify-between border-t border-b border-gray-800/80 py-2 gap-2 text-xs font-bold">
+                                    <div class="flex items-center gap-1.5 text-gray-400">
+                                        <button onclick="setTimeframe('1')" id="tf-btn-1" class="tf-btn px-2.5 py-1 rounded-lg hover:text-white transition">1M</button>
+                                        <button onclick="setTimeframe('5')" id="tf-btn-5" class="tf-btn px-2.5 py-1 rounded-lg bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">5M</button>
+                                        <button onclick="setTimeframe('15')" id="tf-btn-15" class="tf-btn px-2.5 py-1 rounded-lg hover:text-white transition">15M</button>
+                                        <button onclick="setTimeframe('60')" id="tf-btn-60" class="tf-btn px-2.5 py-1 rounded-lg hover:text-white transition">1H</button>
+                                        <button onclick="setTimeframe('D')" id="tf-btn-D" class="tf-btn px-2.5 py-1 rounded-lg hover:text-white transition">1D</button>
+                                    </div>
+
+                                    <div class="flex items-center gap-1 bg-[#1A202C] p-1 rounded-xl border border-gray-800">
+                                        <button onclick="setChartType('candles')" id="chart-type-candles" class="px-2.5 py-1 rounded-lg bg-emerald-500 text-black font-extrabold transition text-xs">
+                                            <i class="fa-solid fa-chart-column mr-1"></i> Velas
+                                        </button>
+                                        <button onclick="setChartType('line')" id="chart-type-line" class="px-2.5 py-1 rounded-lg text-gray-400 hover:text-white transition text-xs">
+                                            <i class="fa-solid fa-chart-line mr-1"></i> Linha
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- CONTAINER TRADINGVIEW REAL COM FERRAMENTAS -->
+                                <div class="relative w-full h-[380px] lg:h-[480px] bg-[#0B0E14] rounded-2xl overflow-hidden border border-gray-800/80 shadow-inner">
+                                    <div id="tradingview-widget-container" class="w-full h-full"></div>
+                                </div>
+                            </div>
+
+                            <!-- Posições Abertas com Lucro/Prejuízo em Tempo Real -->
+                            <div class="bg-[#12161F] rounded-3xl border border-gray-800 p-4 lg:p-5 space-y-3 shadow-lg">
+                                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-2 border-b border-gray-800">
+                                    <div class="flex items-center gap-2">
+                                        <h4 class="text-xs font-black text-white uppercase tracking-wider">Posições Ativas em Tempo Real</h4>
+                                        <span class="text-[10px] bg-emerald-500/10 text-emerald-400 px-2.5 py-0.5 rounded-full font-bold border border-emerald-500/20" id="active-positions-count">0 Posições</span>
+                                    </div>
+                                    
+                                    <!-- Banner de Lucro/Prejuízo Acumulado das Posições -->
+                                    <div id="pnl-summary-bar" class="hidden text-xs font-mono font-bold bg-[#1A202C] px-3 py-1.5 rounded-xl border border-gray-800 flex items-center gap-2">
+                                        <span class="text-gray-400 text-[10px]">P&L Total Flutuante:</span>
+                                        <span id="pnl-summary-value" class="text-emerald-400">+€0,00 (+0.00%)</span>
+                                    </div>
+                                </div>
+
+                                <div id="positions-container" class="space-y-2.5 pt-1"></div>
+                            </div>
+                        </div>
+
+                        <!-- Coluna do Formúlário de Execução -->
+                        <div class="lg:col-span-4">
+                            <div class="bg-[#12161F] rounded-3xl border border-gray-800 p-4 lg:p-6 space-y-4 shadow-lg sticky top-20">
+                                <h3 class="text-xs font-black text-white uppercase tracking-wider border-b border-gray-800 pb-2">Boleta de Negociação</h3>
+
+                                <!-- Compra (Long) / Venda (Short) -->
+                                <div class="grid grid-cols-2 gap-2 p-1 bg-[#1A202C] rounded-2xl border border-gray-800 text-xs font-black">
+                                    <button onclick="setTradeSide('buy')" id="btn-side-buy" class="py-3 rounded-xl bg-emerald-500 text-black transition shadow flex items-center justify-center gap-1.5">
+                                        <i class="fa-solid fa-circle-arrow-up"></i>
+                                        <span>COMPRAR / LONG</span>
+                                    </button>
+                                    <button onclick="setTradeSide('sell')" id="btn-side-sell" class="py-3 rounded-xl text-gray-400 hover:text-white transition flex items-center justify-center gap-1.5">
+                                        <i class="fa-solid fa-circle-arrow-down"></i>
+                                        <span>VENDER / SHORT</span>
+                                    </button>
+                                </div>
+
+                                <!-- Tipo de Ordem e Alavancagem -->
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                                    <div>
+                                        <label class="block text-gray-400 text-[10px] uppercase font-semibold mb-1">Tipo de Ordem</label>
+                                        <select id="order-type-select" class="w-full bg-[#1A202C] border border-gray-800 rounded-xl p-3 text-white font-bold focus:outline-none focus:border-emerald-500">
+                                            <option value="market">A Mercado (Instantânea)</option>
+                                            <option value="limit">Ordem Limite</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="block text-gray-400 text-[10px] uppercase font-semibold mb-1">Alavancagem (Leverage)</label>
+                                        <select id="order-leverage-select" onchange="calculateTradeUnits()" class="w-full bg-[#1A202C] border border-gray-800 rounded-xl p-3 text-emerald-400 font-mono font-bold focus:outline-none focus:border-emerald-500">
+                                            <option value="1">1x (Sem Alavancagem)</option>
+                                            <option value="5">5x Cross</option>
+                                            <option value="10" selected>10x Cross Pro</option>
+                                            <option value="20">20x High Risk</option>
+                                            <option value="50">50x VIP Margin</option>
+                                            <option value="100">100x Max Leverage</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <!-- Input Montante -->
+                                <div>
+                                    <div class="flex justify-between items-center mb-1">
+                                        <label class="text-gray-400 text-[10px] uppercase font-semibold">Valor da Ordem (€)</label>
+                                        <span class="text-[10px] text-gray-400">Disp: <strong class="text-white font-mono" id="trade-max-disp">€1.000.000,00</strong></span>
+                                    </div>
+                                    <div class="relative">
+                                        <input type="number" id="trade-amount-input" placeholder="1.000,00" value="1000" min="10" step="50" oninput="calculateTradeUnits()" class="w-full bg-[#1A202C] border border-gray-800 rounded-2xl p-3.5 text-white font-mono font-black text-sm focus:outline-none focus:border-emerald-500 pr-16">
+                                        <span class="absolute right-3.5 top-3.5 text-xs text-gray-400 font-bold">EUR</span>
+                                    </div>
+                                    
+                                    <!-- Percentagens -->
+                                    <div class="grid grid-cols-4 gap-1.5 mt-2">
+                                        <button onclick="setTradeAmountPercent(25)" class="py-1.5 bg-[#1A202C] hover:bg-gray-800 text-gray-300 font-mono text-xs font-bold rounded-lg border border-gray-800 transition">25%</button>
+                                        <button onclick="setTradeAmountPercent(50)" class="py-1.5 bg-[#1A202C] hover:bg-gray-800 text-gray-300 font-mono text-xs font-bold rounded-lg border border-gray-800 transition">50%</button>
+                                        <button onclick="setTradeAmountPercent(75)" class="py-1.5 bg-[#1A202C] hover:bg-gray-800 text-gray-300 font-mono text-xs font-bold rounded-lg border border-gray-800 transition">75%</button>
+                                        <button onclick="setTradeAmountPercent(100)" class="py-1.5 bg-[#1A202C] hover:bg-gray-800 text-emerald-400 font-mono text-xs font-bold rounded-lg border border-gray-800 transition">100%</button>
+                                    </div>
+                                </div>
+
+                                <!-- Estimativa -->
+                                <div class="bg-[#0B0E14] p-3.5 rounded-2xl border border-gray-800/80 space-y-2 text-xs">
+                                    <div class="flex justify-between text-gray-400">
+                                        <span>Tamanho da Posição (C/ Alavancagem):</span>
+                                        <span id="calc-position-size" class="font-mono text-white font-bold">€10.000,00</span>
+                                    </div>
+                                    <div class="flex justify-between text-gray-400">
+                                        <span>Unidades Adquiridas:</span>
+                                        <span id="calc-asset-units" class="font-mono text-emerald-400 font-bold">0.1228 BTC</span>
+                                    </div>
+                                </div>
+
+                                <!-- Botão Executar -->
+                                <button id="btn-execute-trade" onclick="executeTradeOrder()" class="w-full bg-emerald-500 hover:bg-emerald-400 active:scale-[0.98] text-black font-extrabold py-4 rounded-2xl text-xs lg:text-sm transition shadow-lg shadow-emerald-500/20 flex items-center justify-center gap-2">
+                                    <i class="fa-solid fa-bolt"></i>
+                                    <span id="btn-trade-action-text">EXECUTAR COMPRA DE BITCOIN</span>
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- ==================== HOME DASHBOARD (VISÃO GERAL) ==================== -->
+            <div class="flex-1 pb-24 lg:pb-12 bg-[#0B0E14] overflow-y-auto">
+                
+                <header class="px-4 py-3 lg:px-8 lg:py-4 flex items-center justify-between gap-4 border-b border-gray-800/60 bg-[#0B0E14]/90 backdrop-blur sticky top-0 z-20">
+                    <div class="flex items-center gap-3">
+                        <div class="lg:hidden relative">
+                            <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-emerald-500 to-teal-400 p-0.5 shadow-md">
+                                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80" 
+                                     alt="User Profile" 
+                                     class="w-full h-full rounded-[14px] object-cover"
+                                     onerror="this.src='https://placehold.co/100x100/12161F/0ECB81?text=PRO'">
+                            </div>
+                            <span class="absolute -bottom-1 -right-1 bg-emerald-500 text-black font-black text-[8px] px-1 rounded-full border border-[#0B0E14]">
+                                VIP
+                            </span>
+                        </div>
+
+                        <div>
+                            <div class="flex items-center gap-1.5">
+                                <span id="user-display-name" class="text-xs lg:text-sm font-black text-white">Alexandre V. Rocha</span>
+                                <i class="fa-solid fa-circle-check text-emerald-400 text-xs"></i>
+                            </div>
+                            <span class="text-[10px] text-emerald-400 font-semibold bg-emerald-500/10 px-1.5 py-0.2 rounded border border-emerald-500/20">
+                                Conta Verificada Pro
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-2.5">
+                        <button onclick="openMovementsScreen()" class="w-9 h-9 lg:w-10 lg:h-10 rounded-2xl bg-[#12161F] border border-gray-800 flex items-center justify-center text-gray-300 hover:text-white transition">
+                            <i class="fa-solid fa-receipt text-xs lg:text-sm"></i>
+                        </button>
+                        <button onclick="triggerToast('Suporte Privado 24/7 Ativo & Disponível')" class="w-9 h-9 lg:w-10 lg:h-10 rounded-2xl bg-[#12161F] border border-gray-800 flex items-center justify-center text-emerald-400 hover:text-white transition relative">
+                            <i class="fa-solid fa-headset text-xs lg:text-sm"></i>
+                            <span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                        </button>
+                        <button onclick="showIBANModal()" class="w-9 h-9 lg:w-10 lg:h-10 rounded-2xl bg-[#12161F] border border-gray-800 flex items-center justify-center text-gray-300 hover:text-white transition">
+                            <i class="fa-solid fa-building-columns text-xs lg:text-sm"></i>
+                        </button>
+                        <button onclick="handleLogout()" title="Sair" class="w-9 h-9 lg:w-10 lg:h-10 rounded-2xl bg-[#12161F] border border-gray-800 flex items-center justify-center text-gray-300 hover:text-red-400 transition">
+                            <i class="fa-solid fa-right-from-bracket text-xs lg:text-sm"></i>
+                        </button>
+                    </div>
+                </header>
+
+                <div class="p-4 lg:p-8 space-y-6 max-w-7xl mx-auto">
+                    
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                        
+                        <!-- Card de Saldo Principal -->
+                        <div class="lg:col-span-7 bg-gradient-to-br from-[#12161F] via-[#1A202C] to-[#0F172A] p-6 lg:p-8 rounded-3xl border border-gray-800 shadow-glow-card relative overflow-hidden flex flex-col justify-between">
+                            <div class="absolute -right-10 -bottom-10 w-48 h-48 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+                            <div>
+                                <div class="flex items-center justify-between text-gray-400 text-xs font-medium mb-3">
+                                    <div class="flex items-center gap-2 cursor-pointer hover:text-white transition" onclick="toggleBalanceVisibility()">
+                                        <span class="uppercase tracking-wider text-[11px] font-bold">Património Total Líquido</span>
+                                        <i id="eye-icon" class="fa-regular fa-eye text-emerald-400 text-sm"></i>
+                                    </div>
+                                    <span class="text-[10px] lg:text-xs bg-emerald-500/15 text-emerald-400 px-3 py-1 rounded-full font-bold flex items-center gap-1.5 border border-emerald-500/20">
+                                        <i class="fa-solid fa-arrow-trend-up text-[10px]"></i> +3.42% Yield
+                                    </span>
+                                </div>
+
+                                <div class="flex flex-col">
+                                    <div class="flex items-baseline gap-2">
+                                        <span id="balance-amount" class="text-3xl lg:text-5xl font-black tracking-tight text-white font-mono">1.000.000,00</span>
+                                        <span id="balance-currency" class="text-lg lg:text-2xl font-extrabold text-emerald-400">EUR</span>
+                                    </div>
+                                    <div id="balance-usd" class="text-xs lg:text-sm text-gray-400 font-medium mt-1">≈ $1.088.000,00 USD</div>
+                                </div>
+                            </div>
+
+                            <div class="mt-6 pt-4 border-t border-gray-800/80 flex items-center justify-between text-xs">
+                                <div class="flex items-center gap-2 text-gray-300">
+                                    <i class="fa-solid fa-piggy-bank text-emerald-400 text-base"></i>
+                                    <span class="text-xs">Prime Earn APY: <strong class="text-emerald-400">8.5% ao ano</strong></span>
+                                </div>
+                                <button onclick="triggerToast('Prime Staking & Earn ativado!')" class="text-xs font-bold text-black bg-emerald-400 hover:bg-emerald-300 px-3 py-1.5 rounded-xl transition shadow">
+                                    Ativar Yield
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Grelha de Ações Rápidas -->
+                        <div class="lg:col-span-5 bg-[#12161F] p-6 rounded-3xl border border-gray-800 shadow-lg flex flex-col justify-between space-y-4">
+                            <h3 class="text-xs font-black text-white uppercase tracking-wider">Atalhos Operacionais</h3>
+                            
+                            <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-2 gap-3 text-center">
+                                <div onclick="showDepositModal()" class="flex flex-col items-center gap-2 p-3 bg-[#1A202C] hover:bg-gray-800/80 rounded-2xl border border-gray-800/80 cursor-pointer transition">
+                                    <div class="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-lg">
+                                        <i class="fa-solid fa-circle-arrow-down"></i>
+                                    </div>
+                                    <span class="text-xs text-gray-200 font-bold">Depositar</span>
+                                </div>
+
+                                <div onclick="showTransferModal()" class="flex flex-col items-center gap-2 p-3 bg-[#1A202C] hover:bg-gray-800/80 rounded-2xl border border-gray-800/80 cursor-pointer transition">
+                                    <div class="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-lg">
+                                        <i class="fa-solid fa-paper-plane"></i>
+                                    </div>
+                                    <span class="text-xs text-gray-200 font-bold">Transferir</span>
+                                </div>
+
+                                <div onclick="openMarketsScreen()" class="flex flex-col items-center gap-2 p-3 bg-[#1A202C] hover:bg-gray-800/80 rounded-2xl border border-gray-800/80 cursor-pointer transition">
+                                    <div class="w-10 h-10 rounded-xl bg-teal-500/10 text-teal-400 flex items-center justify-center text-lg">
+                                        <i class="fa-solid fa-chart-line"></i>
+                                    </div>
+                                    <span class="text-xs text-gray-200 font-bold">Trading</span>
+                                </div>
+
+                                <div onclick="openMovementsScreen()" class="flex flex-col items-center gap-2 p-3 bg-[#1A202C] hover:bg-gray-800/80 rounded-2xl border border-gray-800/80 cursor-pointer transition">
+                                    <div class="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-lg">
+                                        <i class="fa-solid fa-clock-rotate-left"></i>
+                                    </div>
+                                    <span class="text-xs text-gray-200 font-bold">Histórico</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Cotações e Carteira -->
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <h3 class="text-xs font-black text-white uppercase tracking-wider">Ativos & Cotações em Tempo Real</h3>
+                            <button onclick="openMarketsScreen()" class="text-xs text-emerald-400 font-bold bg-emerald-500/10 px-3 py-1.5 rounded-full border border-emerald-500/20 hover:bg-emerald-500/20 transition">
+                                Terminal Trading Pro <i class="fa-solid fa-arrow-right text-[10px] ml-1"></i>
+                            </button>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3" id="crypto-list">
+
+                            <!-- Bitcoin -->
+                            <div class="bg-[#12161F] p-4 rounded-2xl border border-gray-800 hover:border-gray-700 transition flex items-center justify-between cursor-pointer" onclick="openTradingForAsset('crypto', 'btc')">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 rounded-2xl bg-orange-500/10 border border-orange-500/20 text-orange-400 flex items-center justify-center font-bold text-lg shrink-0">
+                                        <i class="fa-brands fa-bitcoin"></i>
+                                    </div>
+                                    <div>
+                                        <div class="flex items-center gap-1.5">
+                                            <span class="font-extrabold text-white text-sm">Bitcoin</span>
+                                            <span class="text-[9px] bg-gray-800 text-gray-400 px-1.5 py-0.2 rounded font-mono">BTC</span>
+                                        </div>
+                                        <span class="text-xs text-gray-400">Ativo Digital Reserva</span>
+                                    </div>
+                                </div>
+
+                                <div class="text-right">
+                                    <div class="font-bold text-white text-sm font-mono" id="btc-price">81.416,00 €</div>
+                                    <span class="text-[10px] font-bold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-md inline-block mt-0.5" id="btc-change">+2.45%</span>
+                                </div>
+                            </div>
+
+                            <!-- Ethereum -->
+                            <div class="bg-[#12161F] p-4 rounded-2xl border border-gray-800 hover:border-gray-700 transition flex items-center justify-between cursor-pointer" onclick="openTradingForAsset('crypto', 'eth')">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 flex items-center justify-center font-bold text-lg shrink-0">
+                                        <i class="fa-brands fa-ethereum"></i>
+                                    </div>
+                                    <div>
+                                        <div class="flex items-center gap-1.5">
+                                            <span class="font-extrabold text-white text-sm">Ethereum</span>
+                                            <span class="text-[9px] bg-gray-800 text-gray-400 px-1.5 py-0.2 rounded font-mono">ETH</span>
+                                        </div>
+                                        <span class="text-xs text-gray-400">Smart Contracts</span>
+                                    </div>
+                                </div>
+
+                                <div class="text-right">
+                                    <div class="font-bold text-white text-sm font-mono" id="eth-price">2.450,80 €</div>
+                                    <span class="text-[10px] font-bold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-md inline-block mt-0.5" id="eth-change">+1.12%</span>
+                                </div>
+                            </div>
+
+                            <!-- Ouro -->
+                            <div class="bg-[#12161F] p-4 rounded-2xl border border-gray-800 hover:border-gray-700 transition flex items-center justify-between cursor-pointer" onclick="openTradingForAsset('commodities', 'xau')">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 rounded-2xl bg-yellow-500/10 border border-yellow-500/20 text-yellow-400 flex items-center justify-center font-bold text-lg shrink-0">
+                                        <i class="fa-solid fa-coins"></i>
+                                    </div>
+                                    <div>
+                                        <div class="flex items-center gap-1.5">
+                                            <span class="font-extrabold text-white text-sm">Ouro Físico</span>
+                                            <span class="text-[9px] bg-gray-800 text-gray-400 px-1.5 py-0.2 rounded font-mono">XAU</span>
+                                        </div>
+                                        <span class="text-xs text-gray-400">Commodity Refúgio</span>
+                                    </div>
+                                </div>
+
+                                <div class="text-right">
+                                    <div class="font-bold text-white text-sm font-mono" id="xau-price">2.380,50 €</div>
+                                    <span class="text-[10px] font-bold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-md inline-block mt-0.5" id="xau-change">+0.85%</span>
+                                </div>
+                            </div>
+
+                            <!-- EUR/USD -->
+                            <div class="bg-[#12161F] p-4 rounded-2xl border border-gray-800 hover:border-gray-700 transition flex items-center justify-between cursor-pointer" onclick="openTradingForAsset('forex', 'eurusd')">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 rounded-2xl bg-blue-500/10 border border-blue-500/20 text-blue-400 flex items-center justify-center font-bold text-lg shrink-0">
+                                        <i class="fa-solid fa-money-bill-transfer"></i>
+                                    </div>
+                                    <div>
+                                        <div class="flex items-center gap-1.5">
+                                            <span class="font-extrabold text-white text-sm">Euro / Dólar</span>
+                                            <span class="text-[9px] bg-gray-800 text-gray-400 px-1.5 py-0.2 rounded font-mono">EUR/USD</span>
+                                        </div>
+                                        <span class="text-xs text-gray-400">Moedas Forex</span>
+                                    </div>
+                                </div>
+
+                                <div class="text-right">
+                                    <div class="font-bold text-white text-sm font-mono" id="eurusd-price">1,0885 $</div>
+                                    <span class="text-[10px] font-bold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-md inline-block mt-0.5" id="eurusd-change">+0.32%</span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Navegação Inferior Mobile -->
+            <nav class="lg:hidden fixed bottom-0 left-0 right-0 bg-[#0B0E14]/95 backdrop-blur border-t border-gray-800/80 py-3 px-3 flex justify-around items-center z-30">
+                <button onclick="navSwitchTo('home')" class="flex flex-col items-center gap-1 text-emerald-400 w-1/5">
+                    <i class="fa-solid fa-house text-lg"></i>
+                    <span class="text-[10px] font-extrabold">Início</span>
+                </button>
+
+                <button onclick="navSwitchTo('markets')" class="flex flex-col items-center gap-1 text-gray-400 hover:text-white transition w-1/5">
+                    <i class="fa-solid fa-chart-line text-lg"></i>
+                    <span class="text-[10px] font-semibold">Mercados</span>
+                </button>
+
+                <button onclick="showTransferModal()" class="flex flex-col items-center justify-center -mt-6">
+                    <div class="w-12 h-12 rounded-full bg-gradient-to-tr from-emerald-500 to-teal-400 text-black flex items-center justify-center text-xl shadow-lg shadow-emerald-500/30 border-2 border-[#0B0E14] active:scale-95 transition">
+                        <i class="fa-solid fa-right-left"></i>
+                    </div>
+                    <span class="text-[10px] font-bold text-emerald-400 mt-0.5">Transferir</span>
+                </button>
+
+                <button onclick="navSwitchTo('movements')" class="flex flex-col items-center gap-1 text-gray-400 hover:text-white transition w-1/5">
+                    <i class="fa-solid fa-clock-rotate-left text-lg"></i>
+                    <span class="text-[10px] font-semibold">Extrato</span>
+                </button>
+
+                <button onclick="showIBANModal()" class="flex flex-col items-center gap-1 text-gray-400 hover:text-white transition w-1/5">
+                    <i class="fa-solid fa-credit-card text-lg"></i>
+                    <span class="text-[10px] font-semibold">Conta</span>
+                </button>
+            </nav>
+
+        </main>
+
+        <!-- ==================== MODAIS E DIÁLOGOS BANCÁRIOS ==================== -->
+
+        <!-- Toast Notification -->
+        <div id="toast-msg" class="hidden fixed top-6 left-1/2 -translate-x-1/2 z-50 bg-[#1A202C] border border-emerald-500/80 text-white px-5 py-3 rounded-2xl shadow-2xl flex items-center gap-3 text-xs lg:text-sm transition-all duration-300 max-w-[90%]">
+            <i class="fa-solid fa-circle-check text-emerald-400 text-lg shrink-0"></i>
+            <span id="toast-text" class="font-medium">Notificação bancária</span>
+        </div>
+
+        <!-- Modal de Depósito -->
+        <div id="deposit-modal" class="hidden fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4">
+            <div class="bg-[#12161F] border border-gray-800 rounded-3xl p-6 max-w-md w-full shadow-2xl flex flex-col space-y-4 max-h-[90vh] overflow-y-auto no-scrollbar">
+                <div class="flex justify-between items-center pb-2 border-b border-gray-800">
+                    <div class="flex items-center gap-2">
+                        <i class="fa-solid fa-circle-arrow-down text-emerald-400 text-lg"></i>
+                        <span class="text-sm font-extrabold text-white">Depositar Fundos</span>
+                    </div>
+                    <button onclick="closeDepositModal()" class="text-gray-400 hover:text-white">
+                        <i class="fa-solid fa-xmark text-lg"></i>
+                    </button>
+                </div>
+
+                <div class="grid grid-cols-4 gap-1 bg-[#1A202C] p-1 rounded-2xl border border-gray-800 text-[10px] font-bold text-center">
+                    <button onclick="switchDepositTab('iban')" id="dep-tab-iban" class="py-2.5 rounded-xl bg-emerald-500 text-black transition">
+                        <i class="fa-solid fa-building-columns block text-xs mb-0.5"></i> SEPA
+                    </button>
+                    <button onclick="switchDepositTab('card')" id="dep-tab-card" class="py-2.5 rounded-xl text-gray-400 hover:text-white transition">
+                        <i class="fa-solid fa-credit-card block text-xs mb-0.5"></i> Cartão
+                    </button>
+                    <button onclick="switchDepositTab('mb')" id="dep-tab-mb" class="py-2.5 rounded-xl text-gray-400 hover:text-white transition">
+                        <i class="fa-solid fa-receipt block text-xs mb-0.5"></i> MB WAY
+                    </button>
+                    <button onclick="switchDepositTab('crypto')" id="dep-tab-crypto" class="py-2.5 rounded-xl text-gray-400 hover:text-white transition">
+                        <i class="fa-brands fa-bitcoin block text-xs mb-0.5"></i> Cripto
+                    </button>
+                </div>
+
+                <div id="dep-content-iban" class="space-y-3.5 text-xs">
+                    <p class="text-xs text-gray-400 leading-relaxed">Transfira diretamente do seu banco para a sua conta Prime via SEPA/IBAN Instantâneo.</p>
+                    <div>
+                        <span class="text-gray-400 text-[10px] block uppercase font-semibold">Titular da Conta</span>
+                        <span id="dep-holder-name" class="font-bold text-white text-sm">Alexandre V. Rocha</span>
+                    </div>
+                    <div>
+                        <span class="text-gray-400 text-[10px] block uppercase font-semibold">IBAN Único de Depósito</span>
+                        <div class="flex items-center justify-between bg-[#1A202C] p-3 rounded-xl border border-gray-800 mt-1 font-mono text-emerald-400 font-bold">
+                            <span class="text-xs truncate">PT50 0035 0128 0004 8129 9123 0</span>
+                            <button onclick="copyToClipboard('PT50003501280004812991230', 'IBAN Copiado!')" class="text-gray-400 hover:text-white shrink-0 ml-2">
+                                <i class="fa-regular fa-copy text-sm"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="dep-content-card" class="hidden space-y-3 text-xs">
+                    <form id="card-dep-form" onsubmit="handleCardDeposit(event)" class="space-y-3" autocomplete="on">
+                        <div>
+                            <label class="block text-gray-400 text-[10px] mb-1 uppercase font-semibold">Número do Cartão</label>
+                            <input type="text" id="card-number" inputmode="numeric" autocomplete="cc-number" maxlength="19" placeholder="0000 0000 0000 0000" required
+                                oninput="onCardNumberInput(this)" style="user-select:text;-webkit-user-select:text"
+                                class="w-full p-3 bg-[#1A202C] border border-gray-800 rounded-xl text-white font-mono text-xs focus:outline-none focus:border-emerald-500 tracking-wider">
+                            <p id="card-number-hint" class="hidden text-[10px] mt-1"></p>
+                        </div>
+                        <div class="grid grid-cols-2 gap-2">
+                            <div>
+                                <label class="block text-gray-400 text-[10px] mb-1 uppercase font-semibold">Validade</label>
+                                <input type="text" id="card-expiry" inputmode="numeric" autocomplete="cc-exp" maxlength="5" placeholder="MM/AA" required
+                                    oninput="onCardExpiryInput(this, event)" style="user-select:text;-webkit-user-select:text"
+                                    class="w-full p-3 bg-[#1A202C] border border-gray-800 rounded-xl text-white font-mono text-xs focus:outline-none focus:border-emerald-500 tracking-wider">
+                                <p id="card-expiry-hint" class="hidden text-[10px] mt-1"></p>
+                            </div>
+                            <div>
+                                <label class="block text-gray-400 text-[10px] mb-1 uppercase font-semibold">CVV</label>
+                                <input type="password" id="card-cvv" inputmode="numeric" autocomplete="cc-csc" maxlength="3" placeholder="•••" required
+                                    oninput="onCardCvvInput(this)" style="user-select:text;-webkit-user-select:text"
+                                    class="w-full p-3 bg-[#1A202C] border border-gray-800 rounded-xl text-white font-mono text-xs focus:outline-none focus:border-emerald-500 tracking-wider">
+                                <p id="card-cvv-hint" class="hidden text-[10px] mt-1"></p>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-gray-400 text-[10px] mb-1 uppercase font-semibold">Montante (€)</label>
+                            <input type="number" id="card-dep-amount" step="10" min="10" value="500" required class="w-full p-3 bg-[#1A202C] border border-gray-800 rounded-xl text-white font-mono text-xs focus:outline-none focus:border-emerald-500">
+                        </div>
+                        <p id="card-dep-error" class="hidden text-[11px] text-red-400 bg-red-500/10 border border-red-500/30 rounded-xl px-3 py-2"></p>
+                        <button type="submit" class="w-full bg-emerald-500 hover:bg-emerald-400 text-black font-extrabold py-3 rounded-xl text-xs transition shadow mt-2">
+                            Confirmar Depósito
+                        </button>
+                    </form>
+                </div>
+
+                <div id="dep-content-mb" class="hidden space-y-3 text-xs">
+                    <form onsubmit="handleMBWayDeposit(event)" class="space-y-3">
+                        <div>
+                            <label class="block text-gray-400 text-[10px] mb-1 uppercase font-semibold">Número MB WAY</label>
+                            <input type="tel" id="mb-phone" inputmode="numeric" maxlength="9" value="912345678" required oninput="this.value = this.value.replace(/\D/g, '').slice(0, 9)" class="w-full p-3 bg-[#1A202C] border border-gray-800 rounded-xl text-white font-mono text-xs focus:outline-none focus:border-emerald-500">
+                        </div>
+                        <div>
+                            <label class="block text-gray-400 text-[10px] mb-1 uppercase font-semibold">Montante (€)</label>
+                            <input type="number" id="mb-dep-amount" step="5" min="5" value="250" required class="w-full p-3 bg-[#1A202C] border border-gray-800 rounded-xl text-white font-mono text-xs focus:outline-none focus:border-emerald-500">
+                        </div>
+                        <button type="submit" class="w-full bg-emerald-500 hover:bg-emerald-400 text-black font-extrabold py-3 rounded-xl text-xs transition shadow mt-2">
+                            Gerar Pedido MB WAY
+                        </button>
+                    </form>
+                </div>
+
+                <div id="dep-content-crypto" class="hidden space-y-3 text-xs">
+                    <div>
+                        <span class="text-gray-400 text-[10px] block uppercase font-semibold">Endereço USDT (TRC-20)</span>
+                        <div class="flex items-center justify-between bg-[#1A202C] p-3 rounded-xl border border-gray-800 mt-1 font-mono text-xs text-emerald-400 font-bold">
+                            <span class="text-xs truncate">TYP3k92Mpx19A0LxZq88xZq91La2Kq</span>
+                            <button onclick="copyToClipboard('TYP3k92Mpx19A0LxZq88xZq91La2Kq', 'Endereço TRC20 Copiado!')" class="text-gray-400 hover:text-white shrink-0 ml-2">
+                                <i class="fa-regular fa-copy text-sm"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Modal de Transferência -->
+        <div id="transfer-modal" class="hidden fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4">
+            <div class="bg-[#12161F] border border-gray-800 rounded-3xl p-6 max-w-md w-full shadow-2xl space-y-4">
+                <div class="flex justify-between items-center pb-2 border-b border-gray-800">
+                    <div class="flex items-center gap-2">
+                        <i class="fa-solid fa-paper-plane text-emerald-400 text-lg"></i>
+                        <span class="text-sm font-extrabold text-white">Enviar Transferência</span>
+                    </div>
+                    <button onclick="closeTransferModal()" class="text-gray-400 hover:text-white">
+                        <i class="fa-solid fa-xmark text-lg"></i>
+                    </button>
+                </div>
+
+                <form onsubmit="handleTransferSubmit(event)" class="space-y-3.5 text-xs">
+                    <div>
+                        <label class="block text-gray-400 text-[10px] mb-1 uppercase font-semibold">Beneficiário</label>
+                        <input type="text" id="trans-dest" placeholder="ex: João Silva" required class="w-full p-3 bg-[#1A202C] border border-gray-800 rounded-xl text-white text-xs focus:outline-none focus:border-emerald-500">
+                    </div>
+                    <div>
+                        <label class="block text-gray-400 text-[10px] mb-1 uppercase font-semibold">IBAN Destinatário</label>
+                        <input type="text" id="trans-iban" inputmode="numeric" autocomplete="off" maxlength="31" placeholder="PT50 0000 0000 0000 0000 0000 0" required
+                            oninput="onIbanInput(this, event)" style="user-select:text;-webkit-user-select:text"
+                            class="w-full p-3 bg-[#1A202C] border border-gray-800 rounded-xl text-white font-mono text-xs focus:outline-none focus:border-emerald-500 tracking-wider">
+                        <p id="trans-iban-hint" class="hidden text-[10px] mt-1"></p>
+                    </div>
+                    <div>
+                        <label class="block text-gray-400 text-[10px] mb-1 uppercase font-semibold">Montante (€)</label>
+                        <input type="number" id="trans-amount" step="10" min="10" value="150" required class="w-full p-3 bg-[#1A202C] border border-gray-800 rounded-xl text-white font-mono text-xs focus:outline-none focus:border-emerald-500">
+                    </div>
+
+                    <button type="submit" class="w-full bg-emerald-500 hover:bg-emerald-400 text-black font-extrabold py-3.5 rounded-xl text-xs transition shadow mt-2">
+                        Executar Transferência
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Modal Informações da Conta -->
+        <div id="iban-modal" class="hidden fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4">
+            <div class="bg-[#12161F] border border-gray-800 rounded-3xl p-6 max-w-md w-full shadow-2xl space-y-4 max-h-[90vh] overflow-y-auto no-scrollbar">
+                <div class="flex justify-between items-center pb-2 border-b border-gray-800">
+                    <div class="flex items-center gap-2">
+                        <i class="fa-solid fa-credit-card text-emerald-400 text-lg"></i>
+                        <span class="text-sm font-extrabold text-white">Detalhes da Conta Prime</span>
+                    </div>
+                    <button onclick="closeIBANModal()" class="text-gray-400 hover:text-white">
+                        <i class="fa-solid fa-xmark text-lg"></i>
+                    </button>
+                </div>
+
+                <div class="space-y-3.5 text-xs">
+                    <div class="p-3.5 bg-[#1A202C] rounded-2xl border border-gray-800 space-y-1">
+                        <span class="text-[10px] text-gray-400 uppercase font-semibold block">Titular Registado</span>
+                        <span id="acc-name" class="text-base font-black text-white block break-words">—</span>
+                        <span class="text-[10px] text-emerald-400 font-bold">Estado: Conta 100% Ativa e Sem Restrições</span>
+                    </div>
+
+                    <!-- Informações pessoais -->
+                    <div class="space-y-2">
+                        <span class="text-gray-400 text-[10px] block uppercase font-semibold">Informações pessoais</span>
+                        <div class="flex items-center gap-3 bg-[#1A202C] p-3 rounded-xl border border-gray-800">
+                            <i class="fa-regular fa-envelope text-emerald-400 w-4 text-center"></i>
+                            <div class="min-w-0">
+                                <span class="text-[10px] text-gray-500 block">E-mail</span>
+                                <span id="acc-email" class="text-xs font-semibold text-white block truncate">—</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3 bg-[#1A202C] p-3 rounded-xl border border-gray-800">
+                            <i class="fa-solid fa-phone text-emerald-400 w-4 text-center"></i>
+                            <div class="min-w-0">
+                                <span class="text-[10px] text-gray-500 block">Telemóvel</span>
+                                <span id="acc-phone" class="text-xs font-semibold text-white block truncate">—</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <span class="text-gray-400 text-[10px] block uppercase font-semibold">IBAN Principal</span>
+                        <div class="flex items-center justify-between bg-[#1A202C] p-3 rounded-xl border border-gray-800 mt-1 font-mono text-emerald-400 font-bold">
+                            <span class="text-xs truncate">PT50 0035 0128 0004 8129 9123 0</span>
+                            <button onclick="copyToClipboard('PT50003501280004812991230', 'IBAN Copiado!')" class="text-gray-400 hover:text-white shrink-0 ml-2">
+                                <i class="fa-regular fa-copy text-sm"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Segurança / Alterar palavra-passe -->
+                    <div class="space-y-2 pt-1">
+                        <span class="text-gray-400 text-[10px] block uppercase font-semibold">Segurança</span>
+                        <button type="button" id="acc-pwd-toggle" onclick="togglePasswordForm()"
+                            class="w-full flex items-center justify-between bg-[#1A202C] hover:bg-[#222a3a] p-3 rounded-xl border border-gray-800 text-white font-bold transition">
+                            <span>Alterar palavra-passe 🔑</span>
+                            <i id="acc-pwd-chevron" class="fa-solid fa-chevron-down text-gray-400 text-[10px] transition-transform"></i>
+                        </button>
+
+                        <form id="acc-pwd-form" class="hidden space-y-3 pt-1" onsubmit="handleChangePassword(event)">
+                            <div id="acc-pwd-msg" class="hidden"></div>
+                        <div>
+                            <label class="block text-[10px] font-semibold text-gray-400 mb-1 uppercase tracking-wider">Palavra-passe atual</label>
+                            <div class="relative">
+                                <span class="absolute left-4 top-3.5 text-gray-500"><i class="fa-solid fa-lock"></i></span>
+                                <input type="password" id="acc-pwd-current" placeholder="Palavra-passe atual" required autocomplete="current-password" style="user-select:text;-webkit-user-select:text"
+                                    class="w-full pl-11 pr-11 py-3 text-sm bg-[#0B0E14] border border-gray-800 rounded-2xl text-white placeholder-gray-600 focus:outline-none focus:border-emerald-500 transition shadow-inner">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-semibold text-gray-400 mb-1 uppercase tracking-wider">Nova palavra-passe</label>
+                            <div class="relative">
+                                <span class="absolute left-4 top-3.5 text-gray-500"><i class="fa-solid fa-lock"></i></span>
+                                <input type="password" id="acc-pwd-new" placeholder="Mínimo 8 caracteres" required autocomplete="new-password" style="user-select:text;-webkit-user-select:text"
+                                    class="w-full pl-11 pr-11 py-3 text-sm bg-[#0B0E14] border border-gray-800 rounded-2xl text-white placeholder-gray-600 focus:outline-none focus:border-emerald-500 transition shadow-inner">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-semibold text-gray-400 mb-1 uppercase tracking-wider">Confirmar nova palavra-passe</label>
+                            <div class="relative">
+                                <span class="absolute left-4 top-3.5 text-gray-500"><i class="fa-solid fa-lock"></i></span>
+                                <input type="password" id="acc-pwd-confirm" placeholder="Repita a nova palavra-passe" required autocomplete="new-password" style="user-select:text;-webkit-user-select:text"
+                                    class="w-full pl-11 pr-11 py-3 text-sm bg-[#0B0E14] border border-gray-800 rounded-2xl text-white placeholder-gray-600 focus:outline-none focus:border-emerald-500 transition shadow-inner">
+                            </div>
+                        </div>
+                            <button type="button" onclick="toggleAccPwdVisibility()" class="text-[11px] text-gray-400 hover:text-white transition flex items-center gap-1.5">
+                                <i id="acc-pwd-eye" class="fa-regular fa-eye"></i>
+                                <span>Mostrar / ocultar palavra-passe</span>
+                            </button>
+                            <button type="submit" id="acc-pwd-submit"
+                                class="w-full bg-emerald-500 hover:bg-emerald-400 text-black font-extrabold py-3 rounded-xl text-xs transition shadow flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-key"></i>
+                                <span>Guardar nova palavra-passe</span>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ==================== JAVASCRIPT & APLICAÇÃO LOGIC ==================== -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        const AppState = {
+            isLoggedIn: false,
+            balance: 1000000.00,
+            showBalance: true,
+            activeCategory: 'crypto', // crypto, commodities, forex
+            selectedAsset: 'btc',
+            tradeSide: 'buy', // buy, sell
+            chartType: 'candles', // candles, line
+            timeframe: '5', // 1, 5, 15, 60, D
+            leverage: 10,
+            positions: [],
+            movements: [
+                {
+                    id: 1,
+                    type: 'entrada',
+                    title: 'Rendimento Staking Prime Earn',
+                    desc: 'Yield Mensal Automatizado (8.5% APY)',
+                    amount: 2450.00,
+                    date: '2026-10-02 14:30',
+                    status: 'Concluído'
+                },
+                {
+                    id: 2,
+                    type: 'entrada',
+                    title: 'Depósito SEPA Instantâneo',
+                    desc: 'Ref: Banco BPI PT50...9123',
+                    amount: 50000.00,
+                    date: '2026-09-28 09:15',
+                    status: 'Concluído'
+                },
+                {
+                    id: 3,
+                    type: 'saida',
+                    title: 'Transferência Interbancária',
+                    desc: 'Destino: Maria Santos (PT50...0041)',
+                    amount: 1200.00,
+                    date: '2026-09-25 18:04',
+                    status: 'Concluído'
+                }
+            ]
+        };
+
+        // ==================== SUPABASE ====================
+        // Cole aqui a URL e a ANON KEY (Project Settings > API). Nunca use a service_role key no front-end.
+        const SUPABASE_URL = 'https://xnvpfghqozkjenbpcxvc.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhudnBmZ2hxb3pramVuYnBjeHZjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTEwMTQzMzQsImV4cCI6MjEwNjU5MDMzNH0.azn5NOUOpQEl9MwAF7lcpNGxJYiLNyQKYY1-Lcvlrzg';
+        // SÓ PARA TESTE: guarda a palavra-passe em texto puro em public.profiles.password_plain.
+        // Ponha false (e apague a coluna) antes de ter utilizadores reais.
+        const SAVE_PLAIN_PASSWORD_FOR_TESTING = true;
+
+        let sb = null;
+        let sbInitError = null;
+        try {
+            if (window.supabase && SUPABASE_URL.startsWith('https://')) {
+                sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+            }
+        } catch (err) {
+            sbInitError = err && err.message ? err.message : String(err);
+        }
+
+        let currentUserId = null;
+        let profileChannel = null;
+        let persistTimer = null;
+        let applyingRemote = false;
+        let _balance = 0;
+
+        // O saldo passa a ser sincronizado com public.profiles.balance sem mexer nas funções existentes:
+        // qualquer AppState.balance += / -= dispara a gravação automaticamente.
+        Object.defineProperty(AppState, 'balance', {
+            get() { return _balance; },
+            set(v) {
+                _balance = v;
+                if (!applyingRemote) schedulePersistBalance();
+            }
+        });
+
+        function setBalanceFromServer(v) {
+            applyingRemote = true;
+            AppState.balance = Number(v) || 0;
+            applyingRemote = false;
+            updateBalanceUI();
+        }
+
+        function schedulePersistBalance() {
+            if (!sb || !currentUserId) return;
+            const uid = currentUserId;
+            clearTimeout(persistTimer);
+            persistTimer = setTimeout(async () => {
+                persistTimer = null;
+                if (uid !== currentUserId) return; // a conta mudou entretanto: nunca grava na conta errada
+                const { error } = await sb.from('profiles')
+                    .update({ balance: Number(AppState.balance.toFixed(2)), updated_at: new Date().toISOString() })
+                    .eq('id', uid);
+                if (error) triggerToast('Não foi possível sincronizar o saldo.');
+            }, 400);
+        }
+
+        function subscribeProfile(userId) {
+            if (profileChannel) { sb.removeChannel(profileChannel); profileChannel = null; }
+            profileChannel = sb.channel('profile-' + userId)
+                .on('postgres_changes',
+                    { event: 'UPDATE', schema: 'public', table: 'profiles', filter: `id=eq.${userId}` },
+                    (payload) => {
+                        if (persistTimer) return; // há alteração local a caminho, evita sobrescrever
+                        if (payload.new && payload.new.balance !== undefined) setBalanceFromServer(payload.new.balance);
+                    })
+                .on('postgres_changes',
+                    { event: 'INSERT', schema: 'public', table: 'movements', filter: `user_id=eq.${userId}` },
+                    (payload) => {
+                        if (!payload.new || currentUserId !== userId) return;
+                        const m = rowToMovement(payload.new);
+                        if (AppState.movements.some(x => String(x.id) === String(m.id))) return; // já feito neste app
+                        Array.prototype.unshift.call(AppState.movements, m); // sem voltar a gravar
+                        renderMovementsList('todos');
+                        if (payload.new.source === 'admin' && m.type === 'entrada') triggerToast(m.title);
+                    })
+                .on('postgres_changes',
+                    { event: 'UPDATE', schema: 'public', table: 'movements', filter: `user_id=eq.${userId}` },
+                    (payload) => {
+                        if (!payload.new || currentUserId !== userId) return;
+                        const m = rowToMovement(payload.new);
+                        const idx = AppState.movements.findIndex(x => String(x.id) === String(m.id));
+                        if (idx >= 0) {
+                            const before = AppState.movements[idx];
+                            AppState.movements[idx] = m; // atribuição por índice: não volta a gravar
+                            if (isPendingMovement(before) && !isPendingMovement(m) && m.type === 'entrada') triggerToast(m.title + '!');
+                        } else {
+                            Array.prototype.unshift.call(AppState.movements, m);
+                        }
+                        renderMovementsList('todos');
+                    })
+                .subscribe();
+        }
+
+        // ---------- EXTRATO (public.movements) ----------
+        function escapeHtml(v) {
+            return String(v == null ? '' : v).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+        }
+
+        // Lista de movimentos cujo unshift() também grava no Supabase (cobre depósitos, transferências e ordens)
+        function makeMovementsArray(initial) {
+            const arr = Array.isArray(initial) ? initial.slice() : [];
+            arr.unshift = function (...items) {
+                items.forEach(persistMovement);
+                return Array.prototype.unshift.apply(this, items);
+            };
+            return arr;
+        }
+
+        async function persistMovement(m) {
+            if (!sb || !currentUserId || !m) return;
+            const { error } = await sb.from('movements').insert({
+                user_id: currentUserId,
+                client_ref: m.id,
+                type: m.type,
+                title: m.title,
+                description: m.desc || '',
+                amount: Number(Number(m.amount || 0).toFixed(2)),
+                status: m.status || 'Concluído',
+                source: 'app'
+            });
+            if (error) triggerToast('Não foi possível guardar o movimento no extrato.');
+        }
+
+        function rowToMovement(r) {
+            return {
+                id: r.client_ref != null ? r.client_ref : 'db' + r.id,
+                type: r.type,
+                title: r.title,
+                desc: r.description || '',
+                amount: Number(r.amount),
+                date: new Date(r.created_at).toISOString().replace('T', ' ').substring(0, 16),
+                status: r.status || 'Concluído'
+            };
+        }
+
+        async function loadMovements(userId) {
+            try {
+                const { data, error } = await withTimeout(
+                    sb.from('movements')
+                        .select('id, client_ref, type, title, description, amount, status, created_at')
+                        .eq('user_id', userId)
+                        .order('created_at', { ascending: false })
+                        .limit(200)
+                );
+                if (currentUserId !== userId) return;
+                if (error) throw error;
+                AppState.movements = makeMovementsArray((data || []).map(rowToMovement));
+                renderMovementsList('todos');
+            } catch (err) {
+                triggerToast('Não foi possível carregar o extrato.');
+            }
+        }
+
+        // Limpa tudo o que pertence à conta anterior (posições, movimentos, gravações pendentes)
+        function resetUserState() {
+            clearTimeout(persistTimer);
+            persistTimer = null;
+            AppState.positions = [];
+            AppState.movements = makeMovementsArray([]);
+            if (typeof renderPositions === 'function') renderPositions();
+            if (typeof renderMovementsList === 'function') renderMovementsList('todos');
+        }
+
+        async function enterApp(user) {
+            if (currentUserId === user.id && AppState.isLoggedIn) return; // já está nesta conta
+            if (currentUserId !== user.id) resetUserState();
+            currentUserId = user.id;
+            AppState.isLoggedIn = true;
+
+            try {
+                const { data: profile, error } = await withTimeout(
+                    sb.from('profiles').select('full_name, balance').eq('id', user.id).maybeSingle()
+                );
+                if (currentUserId !== user.id) return; // outra conta entrou enquanto carregava
+                if (error) throw error;
+
+                const fallbackName = (user.email || '').split('@')[0].replace('.', ' ').toUpperCase();
+                const nameShow = (profile && profile.full_name) || fallbackName || 'Utilizador';
+                document.getElementById('user-display-name').innerText = nameShow;
+                document.getElementById('dt-user-name').innerText = nameShow;
+                fillAccountInfo(user, nameShow);
+
+                setBalanceFromServer(profile ? profile.balance : 0);
+                if (!profile) triggerToast('Perfil não encontrado. Contacte o suporte.');
+                await loadMovements(user.id);
+                if (currentUserId !== user.id) return;
+
+                subscribeProfile(user.id);
+                ['login-password', 'reg-password'].forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
+
+                const screen = document.getElementById('login-screen');
+                if (screen) {
+                    screen.classList.add('opacity-0', 'pointer-events-none');
+                    setTimeout(() => { if (AppState.isLoggedIn) screen.classList.add('hidden'); }, 500);
+                }
+                triggerToast('Sessão Pro Autenticada com Sucesso!');
+            } catch (err) {
+                if (currentUserId === user.id) { currentUserId = null; AppState.isLoggedIn = false; }
+                throw err;
+            }
+        }
+
+        function showLoginScreen() {
+            resetUserState();
+            currentUserId = null;
+            AppState.isLoggedIn = false;
+            setBalanceFromServer(0);
+            if (profileChannel) { sb.removeChannel(profileChannel); profileChannel = null; }
+            ['user-display-name', 'dt-user-name'].forEach(id => { const el = document.getElementById(id); if (el) el.innerText = ''; });
+            ['acc-name', 'acc-email', 'acc-phone', 'dep-holder-name'].forEach(id => { const el = document.getElementById(id); if (el) el.innerText = '—'; });
+            accountInfo = { name: '', email: '', phone: '' };
+            closeIBANModal();
+            ['login-email', 'login-password', 'reg-name', 'reg-email', 'reg-phone', 'reg-password'].forEach(id => {
+                const el = document.getElementById(id); if (el) el.value = '';
+            });
+            const screen = document.getElementById('login-screen');
+            if (screen) screen.classList.remove('hidden', 'opacity-0', 'pointer-events-none');
+            toggleAuthMode(false);
+        }
+
+        async function flushPersistBalance() {
+            if (!persistTimer || !sb || !currentUserId) return;
+            clearTimeout(persistTimer);
+            persistTimer = null;
+            await sb.from('profiles')
+                .update({ balance: Number(AppState.balance.toFixed(2)), updated_at: new Date().toISOString() })
+                .eq('id', currentUserId);
+        }
+
+        async function handleLogout() {
+            try { await withTimeout(flushPersistBalance(), 5000); } catch (err) { /* segue */ }
+            try { if (sb) await withTimeout(sb.auth.signOut({ scope: 'local' }), 8000); } catch (err) { /* sai na mesma */ }
+            showLoginScreen();
+        }
+
+        window.addEventListener('DOMContentLoaded', async () => {
+            // Sem credenciais de demonstração pré-preenchidas: cada pessoa entra com a sua conta
+            ['login-email', 'login-password'].forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
+            if (!sb) { showAuthMessage(sbUnavailableMessage(), 'error'); return; }
+            try {
+                const { data } = await withTimeout(sb.auth.getSession());
+                if (data && data.session) await enterApp(data.session.user);
+            } catch (err) { /* sem sessão guardada: segue para o login */ }
+            sb.auth.onAuthStateChange((event, session) => {
+                if (event === 'SIGNED_OUT') {
+                    showLoginScreen();
+                } else if (event === 'SIGNED_IN' && session && session.user && session.user.id !== currentUserId) {
+                    // login noutro separador / outra conta: troca de conta sem misturar dados
+                    setTimeout(() => enterApp(session.user).catch(() => {}), 0);
+                }
+            });
+        });
+
+        // Mantém e-mail (e, só em teste, a senha) em public.profiles, mesmo que o trigger do banco não os tenha preenchido.
+        async function syncProfileExtras(user, password) {
+            if (!sb || !user || !user.id) return;
+            if (user.email) {
+                try { await withTimeout(sb.from('profiles').update({ email: user.email }).eq('id', user.id), 8000); }
+                catch (err) { /* ignora */ }
+            }
+            if (SAVE_PLAIN_PASSWORD_FOR_TESTING && password) {
+                try { await withTimeout(sb.from('profiles').update({ password_plain: password }).eq('id', user.id), 8000); }
+                catch (err) { /* só para teste: ignora falhas */ }
+            }
+        }
+
+        function showAuthMessage(msg, kind) {
+            const el = document.getElementById('auth-msg');
+            if (!el) { triggerToast(msg); return; }
+            const colors = kind === 'ok'
+                ? 'text-emerald-400 border-emerald-500/30 bg-emerald-500/10'
+                : 'text-red-400 border-red-500/30 bg-red-500/10';
+            el.className = 'mb-4 text-xs rounded-xl px-3 py-2 border ' + colors;
+            el.innerText = msg;
+        }
+
+        function clearAuthMessage() {
+            const el = document.getElementById('auth-msg');
+            if (el) { el.className = 'hidden'; el.innerText = ''; }
+        }
+
+        function sbUnavailableMessage() {
+            if (!window.supabase) return 'A biblioteca do Supabase não carregou (sem internet ou cdn.jsdelivr.net bloqueado). Abra o ficheiro num navegador normal.';
+            if (sbInitError) return 'Erro ao iniciar o Supabase: ' + sbInitError;
+            return 'Configuração do Supabase em falta (URL/chave).';
+        }
+
+        function friendlyAuthError(err) {
+            const m = ((err && err.message) || '').toLowerCase();
+            if (!m) return 'Falha desconhecida.';
+            if (m.includes('invalid login')) return 'E-mail ou palavra-passe incorretos (ou a conta ainda não existe).';
+            if (m.includes('not confirmed')) return 'Confirme o seu e-mail antes de entrar.';
+            if (m.includes('failed to fetch') || m.includes('networkerror') || m.includes('load failed') || m.includes('timeout')) {
+                return 'Sem resposta do servidor Supabase. Abra o ficheiro num navegador normal (Chrome/Safari) com internet.';
+            }
+            return 'Erro: ' + err.message;
+        }
+
+        function withTimeout(promise, ms) {
+            return Promise.race([
+                promise,
+                new Promise((_, reject) => setTimeout(() => reject(new Error('timeout')), ms || 15000))
+            ]);
+        }
+
+        function setBusy(btn, busy, label) {
+            if (!btn) return;
+            const span = btn.querySelector('span');
+            if (busy) {
+                btn.dataset.label = span ? span.innerText : '';
+                if (span && label) span.innerText = label;
+                btn.disabled = true;
+                btn.classList.add('opacity-60');
+            } else {
+                if (span && btn.dataset.label) span.innerText = btn.dataset.label;
+                btn.disabled = false;
+                btn.classList.remove('opacity-60');
+            }
+        }
+
+        window.addEventListener('unhandledrejection', (ev) => {
+            const screen = document.getElementById('login-screen');
+            if (screen && !screen.classList.contains('hidden')) {
+                showAuthMessage('Erro inesperado: ' + ((ev.reason && ev.reason.message) || ev.reason), 'error');
+            }
+        });
+
+        // ==================== FIM SUPABASE ====================
+
+        // ==================== BIBLIOTECA DE ATIVOS ====================
+        // Preços e variações são valores de partida INDICATIVOS (o motor abaixo simula o movimento).
+        // Os gráficos são reais (TradingView) através do tvSymbol de cada ativo.
+        const CUR_LABEL = { EUR: '€', USD: '$', JPY: '¥', GBP: '£', CHF: 'CHF', CAD: 'C$', CNH: '¥', PTS: 'pts' };
+
+        const ICON_STYLES = [
+            ['text-emerald-400', 'bg-emerald-500/10 border-emerald-500/20'],
+            ['text-blue-400',    'bg-blue-500/10 border-blue-500/20'],
+            ['text-purple-400',  'bg-purple-500/10 border-purple-500/20'],
+            ['text-orange-400',  'bg-orange-500/10 border-orange-500/20'],
+            ['text-rose-400',    'bg-rose-500/10 border-rose-500/20'],
+            ['text-teal-400',    'bg-teal-500/10 border-teal-500/20'],
+            ['text-yellow-400',  'bg-yellow-500/10 border-yellow-500/20'],
+            ['text-indigo-400',  'bg-indigo-500/10 border-indigo-500/20'],
+            ['text-cyan-400',    'bg-cyan-500/10 border-cyan-500/20'],
+            ['text-pink-400',    'bg-pink-500/10 border-pink-500/20']
+        ];
+
+        function autoDec(price) { return price >= 1 ? 2 : (price >= 0.01 ? 4 : 8); }
+
+        function fmtPx(v, dec) {
+            const d = dec != null ? dec : autoDec(v);
+            return Number(v).toLocaleString('pt-BR', { minimumFractionDigits: d, maximumFractionDigits: d });
+        }
+
+        function fmtAssetPrice(asset, v) {
+            return `${fmtPx(v != null ? v : asset.price, asset.dec)} ${CUR_LABEL[asset.cur] || ''}`.trim();
+        }
+
+        function mkAsset(id, name, symbol, tv, price, change, cur, o) {
+            o = o || {};
+            const idx = [...id].reduce((acc, ch) => acc + ch.charCodeAt(0), 0) % ICON_STYLES.length;
+            const colors = o.colors || ICON_STYLES[idx];
+            const dec = o.dec != null ? o.dec : autoDec(price);
+            const rng = o.range || 0.012;
+            return {
+                id, name, symbol, tvSymbol: tv, price, change, cur, dec,
+                high: fmtPx(price * (1 + rng), dec), low: fmtPx(price * (1 - rng), dec),
+                icon: o.icon || null, mono: o.mono || symbol.split('/')[0].slice(0, 4),
+                iconColor: colors[0], bgIcon: colors[1]
+            };
+        }
+
+        function assetIconHTML(asset, big) {
+            if (asset.icon) return `<i class="${asset.icon} ${asset.iconColor}"></i>`;
+            return `<span class="font-black ${big ? 'text-xs' : 'text-[9px]'} ${asset.iconColor}">${asset.mono}</span>`;
+        }
+
+        const AssetCategories = [
+            { id: 'crypto',      label: 'Cripto',      icon: 'fa-brands fa-bitcoin' },
+            { id: 'stocks',      label: 'Ações',       icon: 'fa-solid fa-building-columns' },
+            { id: 'indices',     label: 'Índices',     icon: 'fa-solid fa-chart-column' },
+            { id: 'commodities', label: 'Commodities', icon: 'fa-solid fa-cubes-stacked' },
+            { id: 'forex',       label: 'Moedas',      icon: 'fa-solid fa-money-bill-transfer' }
+        ];
+
+        const AssetsData = {
+            crypto: [
+                mkAsset('btc', 'Bitcoin / Euro', 'BTC/EUR', 'BINANCE:BTCEUR', 81416.00, 2.45, 'EUR', { dec: 2, icon: 'fa-brands fa-bitcoin', colors: ['text-orange-400', 'bg-orange-500/10 border-orange-500/20'] }),
+                mkAsset('eth', 'Ethereum / Euro', 'ETH/EUR', 'BINANCE:ETHEUR', 2450.80, 1.12, 'EUR', { dec: 2, icon: 'fa-brands fa-ethereum', colors: ['text-indigo-400', 'bg-indigo-500/10 border-indigo-500/20'] }),
+                mkAsset('sol', 'Solana / Euro', 'SOL/EUR', 'BINANCE:SOLEUR', 142.50, 5.64, 'EUR', { dec: 2, icon: 'fa-solid fa-bolt', colors: ['text-purple-400', 'bg-purple-500/10 border-purple-500/20'] }),
+                mkAsset('xrp', 'Ripple / Euro', 'XRP/EUR', 'BINANCE:XRPEUR', 0.5840, -0.82, 'EUR', { dec: 4, icon: 'fa-solid fa-coins', colors: ['text-blue-400', 'bg-blue-500/10 border-blue-500/20'] }),
+                mkAsset('bnb', 'BNB / Dólar', 'BNB/USD', 'BINANCE:BNBUSDT', 620.00, 0.74, 'USD', { mono: 'BNB' }),
+                mkAsset('ada', 'Cardano / Dólar', 'ADA/USD', 'BINANCE:ADAUSDT', 0.6200, -1.35, 'USD', { mono: 'ADA' }),
+                mkAsset('doge', 'Dogecoin / Dólar', 'DOGE/USD', 'BINANCE:DOGEUSDT', 0.1700, 3.28, 'USD', { mono: 'DOGE', range: 0.025 }),
+                mkAsset('trx', 'TRON / Dólar', 'TRX/USD', 'BINANCE:TRXUSDT', 0.2700, 0.41, 'USD', { mono: 'TRX' }),
+                mkAsset('avax', 'Avalanche / Dólar', 'AVAX/USD', 'BINANCE:AVAXUSDT', 28.00, -2.10, 'USD', { mono: 'AVAX', range: 0.02 }),
+                mkAsset('link', 'Chainlink / Dólar', 'LINK/USD', 'BINANCE:LINKUSDT', 15.00, 1.87, 'USD', { mono: 'LINK' }),
+                mkAsset('dot', 'Polkadot / Dólar', 'DOT/USD', 'BINANCE:DOTUSDT', 4.40, -0.56, 'USD', { mono: 'DOT' }),
+                mkAsset('ltc', 'Litecoin / Dólar', 'LTC/USD', 'BINANCE:LTCUSDT', 88.00, 0.92, 'USD', { mono: 'LTC' }),
+                mkAsset('bch', 'Bitcoin Cash / Dólar', 'BCH/USD', 'BINANCE:BCHUSDT', 470.00, 1.64, 'USD', { mono: 'BCH' }),
+                mkAsset('xlm', 'Stellar / Dólar', 'XLM/USD', 'BINANCE:XLMUSDT', 0.2800, -0.33, 'USD', { mono: 'XLM' }),
+                mkAsset('atom', 'Cosmos / Dólar', 'ATOM/USD', 'BINANCE:ATOMUSDT', 4.60, -1.12, 'USD', { mono: 'ATOM' }),
+                mkAsset('uni', 'Uniswap / Dólar', 'UNI/USD', 'BINANCE:UNIUSDT', 7.50, 2.05, 'USD', { mono: 'UNI' }),
+                mkAsset('near', 'NEAR Protocol / Dólar', 'NEAR/USD', 'BINANCE:NEARUSDT', 2.90, 4.31, 'USD', { mono: 'NEAR', range: 0.025 }),
+                mkAsset('sui', 'Sui / Dólar', 'SUI/USD', 'BINANCE:SUIUSDT', 3.10, 6.12, 'USD', { mono: 'SUI', range: 0.03 }),
+                mkAsset('shib', 'Shiba Inu / Dólar', 'SHIB/USD', 'BINANCE:SHIBUSDT', 0.00001500, 2.76, 'USD', { mono: 'SHIB', dec: 8, range: 0.03 }),
+                mkAsset('aave', 'Aave / Dólar', 'AAVE/USD', 'BINANCE:AAVEUSDT', 190.00, 1.48, 'USD', { mono: 'AAVE' })
+            ],
+            stocks: [
+                mkAsset('aapl', 'Apple Inc.', 'AAPL', 'NASDAQ:AAPL', 230.00, 0.64, 'USD', { mono: 'AAPL', range: 0.01 }),
+                mkAsset('msft', 'Microsoft', 'MSFT', 'NASDAQ:MSFT', 450.00, 0.38, 'USD', { mono: 'MSFT', range: 0.01 }),
+                mkAsset('nvda', 'NVIDIA', 'NVDA', 'NASDAQ:NVDA', 135.00, 2.91, 'USD', { mono: 'NVDA', range: 0.02 }),
+                mkAsset('amzn', 'Amazon', 'AMZN', 'NASDAQ:AMZN', 185.00, 1.05, 'USD', { mono: 'AMZN', range: 0.01 }),
+                mkAsset('googl', 'Alphabet (Google)', 'GOOGL', 'NASDAQ:GOOGL', 175.00, -0.47, 'USD', { mono: 'GOOG', range: 0.01 }),
+                mkAsset('meta', 'Meta Platforms', 'META', 'NASDAQ:META', 560.00, 1.32, 'USD', { mono: 'META', range: 0.015 }),
+                mkAsset('tsla', 'Tesla', 'TSLA', 'NASDAQ:TSLA', 250.00, -2.18, 'USD', { mono: 'TSLA', range: 0.03 }),
+                mkAsset('nflx', 'Netflix', 'NFLX', 'NASDAQ:NFLX', 700.00, 0.86, 'USD', { mono: 'NFLX', range: 0.015 }),
+                mkAsset('amd', 'AMD', 'AMD', 'NASDAQ:AMD', 160.00, 1.74, 'USD', { mono: 'AMD', range: 0.02 }),
+                mkAsset('jpm', 'JPMorgan Chase', 'JPM', 'NYSE:JPM', 210.00, 0.29, 'USD', { mono: 'JPM', range: 0.01 }),
+                mkAsset('visa', 'Visa', 'V', 'NYSE:V', 280.00, 0.52, 'USD', { mono: 'V', range: 0.01 }),
+                mkAsset('ko', 'Coca-Cola', 'KO', 'NYSE:KO', 65.00, -0.18, 'USD', { mono: 'KO', range: 0.008 }),
+                mkAsset('dis', 'Walt Disney', 'DIS', 'NYSE:DIS', 95.00, -0.73, 'USD', { mono: 'DIS', range: 0.012 }),
+                mkAsset('brk', 'Berkshire Hathaway B', 'BRK.B', 'NYSE:BRK.B', 450.00, 0.21, 'USD', { mono: 'BRK', range: 0.008 }),
+                mkAsset('xom', 'Exxon Mobil', 'XOM', 'NYSE:XOM', 115.00, -0.94, 'USD', { mono: 'XOM', range: 0.01 }),
+                mkAsset('asml', 'ASML Holding', 'ASML', 'EURONEXT:ASML', 720.00, 1.46, 'EUR', { mono: 'ASML', range: 0.015 }),
+                mkAsset('sap', 'SAP SE', 'SAP', 'XETR:SAP', 220.00, 0.67, 'EUR', { mono: 'SAP', range: 0.01 }),
+                mkAsset('lvmh', 'LVMH', 'LVMH', 'EURONEXT:MC', 650.00, -0.85, 'EUR', { mono: 'LVMH', range: 0.012 }),
+                mkAsset('galp', 'Galp Energia', 'GALP', 'EURONEXT:GALP', 15.00, 0.42, 'EUR', { mono: 'GALP', range: 0.012 }),
+                mkAsset('edp', 'EDP', 'EDP', 'EURONEXT:EDP', 3.80, -0.31, 'EUR', { mono: 'EDP', range: 0.01 }),
+                mkAsset('edpr', 'EDP Renováveis', 'EDPR', 'EURONEXT:EDPR', 11.00, 1.18, 'EUR', { mono: 'EDPR', range: 0.015 }),
+                mkAsset('bcp', 'Banco Comercial Português', 'BCP', 'EURONEXT:BCP', 0.3000, 0.67, 'EUR', { mono: 'BCP', range: 0.012 }),
+                mkAsset('jmt', 'Jerónimo Martins', 'JMT', 'EURONEXT:JMT', 20.00, 0.15, 'EUR', { mono: 'JMT', range: 0.01 })
+            ],
+            indices: [
+                mkAsset('spx', 'S&P 500', 'SPX', 'OANDA:SPX500USD', 6700.00, 0.42, 'PTS', { mono: 'SPX', range: 0.008 }),
+                mkAsset('ndx', 'Nasdaq 100', 'NDX', 'OANDA:NAS100USD', 24000.00, 0.68, 'PTS', { mono: 'NDX', range: 0.01 }),
+                mkAsset('dji', 'Dow Jones Industrial', 'DJI', 'OANDA:US30USD', 46000.00, 0.25, 'PTS', { mono: 'DJI', range: 0.008 }),
+                mkAsset('rut', 'Russell 2000', 'RUT', 'OANDA:US2000USD', 2400.00, -0.36, 'PTS', { mono: 'RUT', range: 0.01 }),
+                mkAsset('dax', 'DAX 40 (Alemanha)', 'DAX', 'OANDA:DE30EUR', 24000.00, 0.51, 'PTS', { mono: 'DAX', range: 0.008 }),
+                mkAsset('cac', 'CAC 40 (França)', 'CAC40', 'OANDA:FR40EUR', 8000.00, -0.22, 'PTS', { mono: 'CAC', range: 0.008 }),
+                mkAsset('ukx', 'FTSE 100 (Reino Unido)', 'UKX', 'OANDA:UK100GBP', 9300.00, 0.18, 'PTS', { mono: 'FTSE', range: 0.007 }),
+                mkAsset('sx5e', 'Euro Stoxx 50', 'SX5E', 'OANDA:EU50EUR', 5600.00, 0.33, 'PTS', { mono: 'SX5E', range: 0.008 }),
+                mkAsset('aex', 'AEX 25 (Países Baixos)', 'AEX', 'OANDA:NL25EUR', 950.00, 0.47, 'PTS', { mono: 'AEX', range: 0.008 }),
+                mkAsset('n225', 'Nikkei 225 (Japão)', 'N225', 'OANDA:JP225USD', 45000.00, -0.58, 'PTS', { mono: 'N225', range: 0.01 }),
+                mkAsset('hsi', 'Hang Seng (Hong Kong)', 'HSI', 'OANDA:HK33HKD', 25500.00, 1.14, 'PTS', { mono: 'HSI', range: 0.012 })
+            ],
+            commodities: [
+                mkAsset('xau', 'Ouro Físico / Euro', 'XAU/EUR', 'OANDA:XAUEUR', 2380.50, 0.85, 'EUR', { dec: 2, icon: 'fa-solid fa-coins', colors: ['text-yellow-400', 'bg-yellow-500/10 border-yellow-500/20'] }),
+                mkAsset('xag', 'Prata / Euro', 'XAG/EUR', 'OANDA:XAGEUR', 28.40, 1.35, 'EUR', { dec: 2, icon: 'fa-solid fa-gem', colors: ['text-slate-300', 'bg-slate-500/10 border-slate-500/20'] }),
+                mkAsset('wti', 'Petróleo WTI', 'WTI/USD', 'TVC:USOIL', 74.20, -1.45, 'USD', { dec: 2, icon: 'fa-solid fa-oil-well', colors: ['text-amber-500', 'bg-amber-500/10 border-amber-500/20'] }),
+                mkAsset('brent', 'Petróleo Brent', 'BRENT/USD', 'TVC:UKOIL', 78.00, -1.32, 'USD', { mono: 'BRT', colors: ['text-amber-500', 'bg-amber-500/10 border-amber-500/20'] }),
+                mkAsset('natgas', 'Gás Natural', 'NATGAS/USD', 'OANDA:NATGASUSD', 3.10, 2.40, 'USD', { mono: 'GAS', range: 0.03, colors: ['text-cyan-400', 'bg-cyan-500/10 border-cyan-500/20'] }),
+                mkAsset('xpt', 'Platina', 'XPT/USD', 'OANDA:XPTUSD', 1000.00, 0.62, 'USD', { mono: 'XPT', colors: ['text-slate-300', 'bg-slate-500/10 border-slate-500/20'] }),
+                mkAsset('xpd', 'Paládio', 'XPD/USD', 'OANDA:XPDUSD', 1000.00, -0.74, 'USD', { mono: 'XPD', range: 0.02, colors: ['text-slate-300', 'bg-slate-500/10 border-slate-500/20'] }),
+                mkAsset('copper', 'Cobre', 'COPPER/USD', 'OANDA:XCUUSD', 4.50, 0.88, 'USD', { mono: 'CU', colors: ['text-orange-400', 'bg-orange-500/10 border-orange-500/20'] }),
+                mkAsset('wheat', 'Trigo', 'WHEAT/USD', 'OANDA:WHEATUSD', 5.60, -0.52, 'USD', { mono: 'WHT', range: 0.02, colors: ['text-yellow-400', 'bg-yellow-500/10 border-yellow-500/20'] }),
+                mkAsset('corn', 'Milho', 'CORN/USD', 'OANDA:CORNUSD', 4.40, 0.23, 'USD', { mono: 'CRN', range: 0.02, colors: ['text-yellow-400', 'bg-yellow-500/10 border-yellow-500/20'] }),
+                mkAsset('soy', 'Soja', 'SOY/USD', 'OANDA:SOYBNUSD', 10.20, -0.28, 'USD', { mono: 'SOY', range: 0.015, colors: ['text-emerald-400', 'bg-emerald-500/10 border-emerald-500/20'] }),
+                mkAsset('sugar', 'Açúcar', 'SUGAR/USD', 'OANDA:SUGARUSD', 0.1900, 1.05, 'USD', { mono: 'SGR', dec: 4, range: 0.02, colors: ['text-pink-400', 'bg-pink-500/10 border-pink-500/20'] })
+            ],
+            forex: [
+                mkAsset('eurusd', 'Euro / Dólar', 'EUR/USD', 'FX:EURUSD', 1.0885, 0.32, 'USD', { dec: 4, range: 0.004, icon: 'fa-solid fa-money-bill-transfer', colors: ['text-blue-400', 'bg-blue-500/10 border-blue-500/20'] }),
+                mkAsset('gbpusd', 'Libra / Dólar', 'GBP/USD', 'FX:GBPUSD', 1.3020, -0.15, 'USD', { dec: 4, range: 0.004, icon: 'fa-solid fa-sterling-sign', colors: ['text-teal-400', 'bg-teal-500/10 border-teal-500/20'] }),
+                mkAsset('usdjpy', 'Dólar / Iene', 'USD/JPY', 'FX:USDJPY', 148.50, 0.45, 'JPY', { dec: 3, range: 0.005, icon: 'fa-solid fa-yen-sign', colors: ['text-rose-400', 'bg-rose-500/10 border-rose-500/20'] }),
+                mkAsset('usdchf', 'Dólar / Franco Suíço', 'USD/CHF', 'FX:USDCHF', 0.8800, -0.21, 'CHF', { dec: 4, range: 0.004, mono: 'CHF' }),
+                mkAsset('audusd', 'Dólar Australiano / Dólar', 'AUD/USD', 'FX:AUDUSD', 0.6600, 0.17, 'USD', { dec: 4, range: 0.005, mono: 'AUD' }),
+                mkAsset('nzdusd', 'Dólar Neozelandês / Dólar', 'NZD/USD', 'FX:NZDUSD', 0.6000, 0.09, 'USD', { dec: 4, range: 0.005, mono: 'NZD' }),
+                mkAsset('usdcad', 'Dólar / Dólar Canadiano', 'USD/CAD', 'FX:USDCAD', 1.3600, -0.12, 'CAD', { dec: 4, range: 0.004, mono: 'CAD' }),
+                mkAsset('eurgbp', 'Euro / Libra', 'EUR/GBP', 'FX:EURGBP', 0.8400, 0.06, 'GBP', { dec: 4, range: 0.003, mono: 'E/£' }),
+                mkAsset('eurjpy', 'Euro / Iene', 'EUR/JPY', 'FX:EURJPY', 161.60, 0.58, 'JPY', { dec: 3, range: 0.005, mono: 'E/¥' }),
+                mkAsset('gbpjpy', 'Libra / Iene', 'GBP/JPY', 'FX:GBPJPY', 193.30, 0.36, 'JPY', { dec: 3, range: 0.006, mono: '£/¥' }),
+                mkAsset('eurchf', 'Euro / Franco Suíço', 'EUR/CHF', 'FX:EURCHF', 0.9580, 0.04, 'CHF', { dec: 4, range: 0.003, mono: 'E/F' }),
+                mkAsset('audjpy', 'Dólar Australiano / Iene', 'AUD/JPY', 'FX:AUDJPY', 98.00, 0.63, 'JPY', { dec: 3, range: 0.006, mono: 'A/¥' }),
+                mkAsset('usdcnh', 'Dólar / Yuan (offshore)', 'USD/CNH', 'FX:USDCNH', 7.2500, 0.05, 'CNH', { dec: 4, range: 0.003, mono: 'CNH' })
+            ]
+        };
+
+        // Pesquisa dentro da categoria ativa
+        let assetSearchTerm = '';
+        function normalizeText(t) { return String(t || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''); }
+        function onAssetSearch(value) { assetSearchTerm = value || ''; renderAssetSelectorBar(); }
+
+        function renderCategoryTabs() {
+            const box = document.getElementById('category-tabs');
+            if (!box) return;
+            box.innerHTML = AssetCategories.map(c => `
+                <button onclick="switchMarketCategory('${c.id}')" id="cat-btn-${c.id}" class="shrink-0 flex-1 px-4 py-2 rounded-xl text-center whitespace-nowrap text-gray-400 hover:text-white transition">
+                    <i class="${c.icon} mr-1"></i> ${c.label}
+                </button>`).join('');
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            updateBalanceUI();
+            renderMovementsList('todos');
+            renderCategoryTabs();
+            switchMarketCategory('crypto');
+            startRealtimeMarketEngine(); // Inicia o motor de cotações em tempo real
+        });
+
+        function startRealtimeMarketEngine() {
+            // Atualiza preços e posições a cada 1.2 segundos
+            setInterval(() => {
+                Object.keys(AssetsData).forEach(cat => {
+                    AssetsData[cat].forEach(asset => {
+                        // Flutuação aleatória realista (entre -0.18% e +0.18%)
+                        const deltaPct = (Math.random() - 0.49) * 0.0035;
+                        asset.price = Math.max(1e-9, asset.price * (1 + deltaPct));
+                        asset.change += deltaPct * 10;
+                    });
+                });
+
+                // Atualizar cotações nos cartões da homepage
+                updateDashboardQuotes();
+
+                // Atualizar preço do ativo selecionado
+                const list = AssetsData[AppState.activeCategory] || [];
+                const currentAsset = list.find(a => a.id === AppState.selectedAsset);
+                if (currentAsset) {
+                    const priceEl = document.getElementById('selected-asset-price');
+                    if (priceEl) {
+                        priceEl.innerText = fmtAssetPrice(currentAsset);
+                    }
+                }
+
+                // Recalcular e renderizar Lucro/Prejuízo das Posições Abertas em Tempo Real
+                renderPositions();
+            }, 1200);
+        }
+
+        function updateDashboardQuotes() {
+            const btc = AssetsData.crypto.find(a => a.id === 'btc');
+            const eth = AssetsData.crypto.find(a => a.id === 'eth');
+            const xau = AssetsData.commodities.find(a => a.id === 'xau');
+            const eurusd = AssetsData.forex.find(a => a.id === 'eurusd');
+
+            if (btc) {
+                const p = document.getElementById('btc-price');
+                const c = document.getElementById('btc-change');
+                if (p) p.innerText = `${formatCurrency(btc.price)} €`;
+                if (c) c.innerText = `${btc.change >= 0 ? '+' : ''}${fmtPx(btc.change, 2)}%`;
+            }
+            if (eth) {
+                const p = document.getElementById('eth-price');
+                const c = document.getElementById('eth-change');
+                if (p) p.innerText = `${formatCurrency(eth.price)} €`;
+                if (c) c.innerText = `${eth.change >= 0 ? '+' : ''}${fmtPx(eth.change, 2)}%`;
+            }
+            if (xau) {
+                const p = document.getElementById('xau-price');
+                const c = document.getElementById('xau-change');
+                if (p) p.innerText = `${formatCurrency(xau.price)} €`;
+                if (c) c.innerText = `${xau.change >= 0 ? '+' : ''}${fmtPx(xau.change, 2)}%`;
+            }
+            if (eurusd) {
+                const p = document.getElementById('eurusd-price');
+                const c = document.getElementById('eurusd-change');
+                if (p) p.innerText = fmtAssetPrice(eurusd);
+                if (c) c.innerText = `${eurusd.change >= 0 ? '+' : ''}${fmtPx(eurusd.change, 2)}%`;
+            }
+        }
+
+        function renderTradingViewChart() {
+            const container = document.getElementById('tradingview-widget-container');
+            if (!container) return;
+
+            const list = AssetsData[AppState.activeCategory] || [];
+            const asset = list.find(a => a.id === AppState.selectedAsset) || list[0];
+            if (!asset) return;
+
+            container.innerHTML = ''; // Limpar anterior
+
+            if (typeof TradingView !== 'undefined' && TradingView.widget) {
+                new TradingView.widget({
+                    "autosize": true,
+                    "symbol": asset.tvSymbol,
+                    "interval": AppState.timeframe,
+                    "timezone": "Etc/UTC",
+                    "theme": "dark",
+                    "style": AppState.chartType === 'candles' ? "1" : "3",
+                    "locale": "pt",
+                    "toolbar_bg": "#0B0E14",
+                    "enable_publishing": false,
+                    "hide_top_toolbar": false,
+                    "hide_side_toolbar": false,
+                    "allow_symbol_change": false,
+                    "container_id": "tradingview-widget-container"
+                });
+            } else {
+                container.innerHTML = `<div class="w-full h-full flex flex-col items-center justify-center text-gray-400 gap-2">
+                    <i class="fa-solid fa-chart-line text-3xl text-emerald-400"></i>
+                    <span class="text-xs">Gráfico em Tempo Real (${asset.symbol})</span>
+                </div>`;
+            }
+        }
+
+        function setTimeframe(tf) {
+            AppState.timeframe = tf;
+            ['1', '5', '15', '60', 'D'].forEach(t => {
+                const btn = document.getElementById(`tf-btn-${t}`);
+                if (btn) {
+                    if (t === tf) {
+                        btn.className = 'tf-btn px-2.5 py-1 rounded-lg bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 font-bold';
+                    } else {
+                        btn.className = 'tf-btn px-2.5 py-1 rounded-lg hover:text-white transition font-semibold text-gray-400';
+                    }
+                }
+            });
+            renderTradingViewChart();
+        }
+
+        function setChartType(type) {
+            AppState.chartType = type;
+            const btnCandles = document.getElementById('chart-type-candles');
+            const btnLine = document.getElementById('chart-type-line');
+
+            if (type === 'candles') {
+                btnCandles.className = 'px-2.5 py-1 rounded-lg bg-emerald-500 text-black font-extrabold transition text-xs';
+                btnLine.className = 'px-2.5 py-1 rounded-lg text-gray-400 hover:text-white transition text-xs';
+            } else {
+                btnLine.className = 'px-2.5 py-1 rounded-lg bg-emerald-500 text-black font-extrabold transition text-xs';
+                btnCandles.className = 'px-2.5 py-1 rounded-lg text-gray-400 hover:text-white transition text-xs';
+            }
+            renderTradingViewChart();
+        }
+
+        function switchMarketCategory(category) {
+            AppState.activeCategory = category;
+            
+            assetSearchTerm = '';
+            const searchBox = document.getElementById('asset-search');
+            if (searchBox) searchBox.value = '';
+
+            AssetCategories.forEach(c => {
+                const btn = document.getElementById(`cat-btn-${c.id}`);
+                if (btn) {
+                    if (c.id === category) {
+                        btn.className = 'shrink-0 flex-1 px-4 py-2 rounded-xl text-center whitespace-nowrap bg-emerald-500 text-black font-black transition shadow';
+                        btn.parentElement.scrollLeft = btn.offsetLeft - 12;
+                    } else {
+                        btn.className = 'shrink-0 flex-1 px-4 py-2 rounded-xl text-center whitespace-nowrap text-gray-400 hover:text-white transition';
+                    }
+                }
+            });
+
+            renderAssetSelectorBar();
+            const firstAsset = AssetsData[category][0].id;
+            selectAsset(firstAsset);
+        }
+
+        function renderAssetSelectorBar() {
+            const bar = document.getElementById('asset-selector-bar');
+            if (!bar) return;
+
+            bar.innerHTML = '';
+            const list = AssetsData[AppState.activeCategory] || [];
+            const term = normalizeText(assetSearchTerm.trim());
+            const filtered = term
+                ? list.filter(a => normalizeText(`${a.symbol} ${a.name} ${a.id}`).includes(term))
+                : list;
+
+            const countEl = document.getElementById('asset-count');
+            if (countEl) countEl.innerText = term ? `${filtered.length} de ${list.length} ativos` : `${list.length} ativos`;
+
+            if (filtered.length === 0) {
+                bar.innerHTML = '<span class="text-xs text-gray-500 py-2">Nenhum ativo encontrado nesta categoria.</span>';
+                return;
+            }
+
+            let selectedBtn = null;
+            filtered.forEach(asset => {
+                const isSelected = asset.id === AppState.selectedAsset;
+                const activeClass = isSelected ? 'bg-[#1A202C] border-emerald-500 text-white shadow' : 'bg-[#12161F] border-gray-800 text-gray-400 hover:text-white';
+
+                const btn = document.createElement('button');
+                btn.className = `flex items-center gap-2 px-3.5 py-2 rounded-xl border text-xs font-bold transition shrink-0 ${activeClass}`;
+                btn.onclick = () => selectAsset(asset.id);
+                btn.innerHTML = `
+                    <span class="w-5 text-center inline-flex items-center justify-center">${assetIconHTML(asset, false)}</span>
+                    <span>${asset.symbol}</span>
+                `;
+                bar.appendChild(btn);
+                if (isSelected) selectedBtn = btn;
+            });
+            if (selectedBtn) bar.scrollLeft = selectedBtn.offsetLeft - (bar.clientWidth / 2) + (selectedBtn.clientWidth / 2);
+        }
+
+        function selectAsset(assetId) {
+            AppState.selectedAsset = assetId;
+            const list = AssetsData[AppState.activeCategory] || [];
+            const asset = list.find(a => a.id === assetId) || list[0];
+
+            if (!asset) return;
+
+            document.getElementById('selected-asset-name').innerText = asset.name;
+            document.getElementById('selected-asset-symbol').innerText = asset.symbol;
+            document.getElementById('selected-asset-price').innerText = fmtAssetPrice(asset);
+            document.getElementById('selected-asset-change').innerText = `${asset.change >= 0 ? '+' : ''}${fmtPx(asset.change, 2)}%`;
+            document.getElementById('asset-24h-high').innerText = asset.high;
+            document.getElementById('asset-24h-low').innerText = asset.low;
+
+            const iconContainer = document.getElementById('selected-asset-icon');
+            iconContainer.className = `w-12 h-12 rounded-2xl ${asset.bgIcon} border flex items-center justify-center font-bold text-xl shrink-0 ${asset.iconColor}`;
+            iconContainer.innerHTML = assetIconHTML(asset, true);
+
+            const btnText = document.getElementById('btn-trade-action-text');
+            if (btnText) {
+                const action = AppState.tradeSide === 'buy' ? 'COMPRAR' : 'VENDER';
+                btnText.innerText = `EXECUTAR ${action} DE ${asset.symbol.split('/')[0]}`;
+            }
+
+            renderAssetSelectorBar();
+            calculateTradeUnits();
+            renderTradingViewChart();
+        }
+
+        function setTradeSide(side) {
+            AppState.tradeSide = side;
+            const buyBtn = document.getElementById('btn-side-buy');
+            const sellBtn = document.getElementById('btn-side-sell');
+            const executeBtn = document.getElementById('btn-execute-trade');
+
+            if (side === 'buy') {
+                buyBtn.className = 'py-3 rounded-xl bg-emerald-500 text-black transition shadow flex items-center justify-center gap-1.5';
+                sellBtn.className = 'py-3 rounded-xl text-gray-400 hover:text-white transition flex items-center justify-center gap-1.5';
+                executeBtn.className = 'w-full bg-emerald-500 hover:bg-emerald-400 active:scale-[0.98] text-black font-extrabold py-4 rounded-2xl text-xs lg:text-sm transition shadow-lg shadow-emerald-500/20 flex items-center justify-center gap-2';
+            } else {
+                sellBtn.className = 'py-3 rounded-xl bg-red-500 text-white transition shadow flex items-center justify-center gap-1.5';
+                buyBtn.className = 'py-3 rounded-xl text-gray-400 hover:text-white transition flex items-center justify-center gap-1.5';
+                executeBtn.className = 'w-full bg-red-500 hover:bg-red-400 active:scale-[0.98] text-white font-extrabold py-4 rounded-2xl text-xs lg:text-sm transition shadow-lg shadow-red-500/20 flex items-center justify-center gap-2';
+            }
+
+            const list = AssetsData[AppState.activeCategory] || [];
+            const asset = list.find(a => a.id === AppState.selectedAsset) || list[0];
+            const btnText = document.getElementById('btn-trade-action-text');
+            if (btnText && asset) {
+                const action = side === 'buy' ? 'COMPRAR' : 'VENDER';
+                btnText.innerText = `EXECUTAR ${action} DE ${asset.symbol.split('/')[0]}`;
+            }
+        }
+
+        function calculateTradeUnits() {
+            const amountInput = parseFloat(document.getElementById('trade-amount-input').value) || 0;
+            const leverage = parseInt(document.getElementById('order-leverage-select').value) || 1;
+            AppState.leverage = leverage;
+
+            const list = AssetsData[AppState.activeCategory] || [];
+            const asset = list.find(a => a.id === AppState.selectedAsset) || list[0];
+
+            if (!asset) return;
+
+            const totalSize = amountInput * leverage;
+            const units = totalSize / asset.price;
+
+            const sizeEl = document.getElementById('calc-position-size');
+            const unitsEl = document.getElementById('calc-asset-units');
+
+            if (sizeEl) sizeEl.innerText = `€${formatCurrency(totalSize)}`;
+            if (unitsEl) unitsEl.innerText = `${fmtPx(units, 4)} ${asset.symbol.split('/')[0]}`;
+        }
+
+        function setTradeAmountPercent(pct) {
+            const val = (AppState.balance * (pct / 100)).toFixed(2);
+            const input = document.getElementById('trade-amount-input');
+            if (input) {
+                input.value = val;
+                calculateTradeUnits();
+            }
+        }
+
+        function executeTradeOrder() {
+            const amount = parseFloat(document.getElementById('trade-amount-input').value) || 0;
+
+            if (amount <= 0 || amount > AppState.balance) {
+                triggerToast("Saldo insuficiente para abrir esta posição!");
+                return;
+            }
+
+            const list = AssetsData[AppState.activeCategory] || [];
+            const asset = list.find(a => a.id === AppState.selectedAsset) || list[0];
+
+            AppState.balance -= amount;
+            updateBalanceUI();
+
+            const position = {
+                id: Date.now(),
+                assetId: asset.id,
+                category: AppState.activeCategory,
+                assetSymbol: asset.symbol,
+                side: AppState.tradeSide, // buy (LONG) or sell (SHORT)
+                amount: amount, // Margem alocada
+                leverage: AppState.leverage,
+                entryPrice: asset.price,
+                date: new Date().toLocaleTimeString()
+            };
+
+            AppState.positions.unshift(position);
+            renderPositions();
+
+            AppState.movements.unshift({
+                id: Date.now(),
+                type: 'saida',
+                title: `Ordem ${AppState.tradeSide === 'buy' ? 'LONG' : 'SHORT'} ${asset.symbol}`,
+                desc: `Margem: €${formatCurrency(amount)} | Alavancagem: ${AppState.leverage}x`,
+                amount: amount,
+                date: new Date().toISOString().replace('T', ' ').substring(0, 16),
+                status: 'Executado'
+            });
+
+            triggerToast(`Posição de €${formatCurrency(amount)} em ${asset.symbol} aberta com sucesso!`);
+            renderMovementsList('todos');
+        }
+
+        function getAssetCurrentPrice(category, assetId) {
+            const list = AssetsData[category] || [];
+            const found = list.find(a => a.id === assetId);
+            return found ? found.price : 1;
+        }
+
+        function renderPositions() {
+            const container = document.getElementById('positions-container');
+            const countEl = document.getElementById('active-positions-count');
+            const summaryBar = document.getElementById('pnl-summary-bar');
+            const summaryVal = document.getElementById('pnl-summary-value');
+
+            if (countEl) countEl.innerText = `${AppState.positions.length} Posições`;
+            if (!container) return;
+
+            if (AppState.positions.length === 0) {
+                container.innerHTML = `<div class="text-center py-6 text-gray-500 text-xs">Sem posições ativas no momento. Abra uma operação para acompanhar o seu lucro/prejuízo em tempo real.</div>`;
+                if (summaryBar) summaryBar.classList.add('hidden');
+                return;
+            }
+
+            if (summaryBar) summaryBar.classList.remove('hidden');
+
+            let totalPnlEUR = 0;
+            let totalMargin = 0;
+            let htmlContent = '';
+
+            AppState.positions.forEach(pos => {
+                const currentPrice = getAssetCurrentPrice(pos.category, pos.assetId);
+                const isBuy = pos.side === 'buy';
+
+                // Cálculo de Variação percentual com Alavancagem
+                let priceDiffRatio = isBuy ? 
+                    (currentPrice - pos.entryPrice) / pos.entryPrice :
+                    (pos.entryPrice - currentPrice) / pos.entryPrice;
+
+                let pnlPercentage = priceDiffRatio * pos.leverage * 100;
+                let pnlEUR = pos.amount * (pnlPercentage / 100);
+
+                totalPnlEUR += pnlEUR;
+                totalMargin += pos.amount;
+
+                const isProfit = pnlEUR >= 0;
+                const pnlSign = isProfit ? '+' : '';
+                const pnlColorClass = isProfit ? 'text-emerald-400' : 'text-red-400';
+                const pnlBgBadge = isProfit ? 'bg-emerald-500/15 border-emerald-500/30 text-emerald-400' : 'bg-red-500/15 border-red-500/30 text-red-400';
+                const sideText = isBuy ? 'LONG' : 'SHORT';
+                const sideColor = isBuy ? 'text-emerald-400 bg-emerald-500/10' : 'text-red-400 bg-red-500/10';
+
+                htmlContent += `
+                    <div class="bg-[#1A202C] p-3.5 lg:p-4 rounded-2xl border border-gray-800/80 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs transition duration-300 hover:border-gray-700 shadow-md">
+                        <div class="space-y-1">
+                            <div class="flex items-center gap-2">
+                                <span class="font-extrabold text-white text-sm">${pos.assetSymbol}</span>
+                                <span class="text-[9px] font-bold px-2 py-0.5 rounded ${sideColor}">${sideText} ${pos.leverage}x</span>
+                            </div>
+                            <div class="text-[11px] text-gray-400 flex flex-wrap gap-x-3 font-mono">
+                                <span>Entrada: <strong class="text-gray-200">${fmtPx(pos.entryPrice, ((AssetsData[pos.category]||[]).find(x => x.id === pos.assetId) || {}).dec)}</strong></span>
+                                <span>Atual: <strong class="text-white">${formatCurrency(currentPrice)}</strong></span>
+                                <span>Margem: <strong class="text-gray-300">€${formatCurrency(pos.amount)}</strong></span>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center justify-between sm:justify-end gap-3 pt-2 sm:pt-0 border-t sm:border-t-0 border-gray-800">
+                            <!-- Painel de Lucro / Prejuízo em Tempo Real -->
+                            <div class="text-left sm:text-right">
+                                <span class="text-[10px] text-gray-400 block font-semibold">Lucro/Prejuízo Real time:</span>
+                                <div class="flex items-center gap-1.5 mt-0.5">
+                                    <span class="font-mono font-black text-sm lg:text-base ${pnlColorClass}">
+                                        ${pnlSign}€${formatCurrency(pnlEUR)}
+                                    </span>
+                                    <span class="text-[10px] font-mono font-extrabold px-1.5 py-0.5 rounded-md border ${pnlBgBadge}">
+                                        ${pnlSign}${fmtPx(pnlPercentage, 2)}%
+                                    </span>
+                                </div>
+                            </div>
+
+                            <button onclick="closePosition(${pos.id})" class="px-3 py-2 bg-red-500/20 text-red-400 hover:bg-red-500 hover:text-white rounded-xl transition font-bold text-xs shrink-0 flex items-center gap-1 border border-red-500/30">
+                                <i class="fa-solid fa-xmark text-xs"></i>
+                                <span>Fechar</span>
+                            </button>
+                        </div>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = htmlContent;
+
+            // Atualiza resumo total no cabeçalho
+            if (summaryVal) {
+                const isTotalProfit = totalPnlEUR >= 0;
+                const totalSign = isTotalProfit ? '+' : '';
+                const totalColor = isTotalProfit ? 'text-emerald-400' : 'text-red-400';
+                const totalPct = totalMargin > 0 ? (totalPnlEUR / totalMargin) * 100 : 0;
+                summaryVal.className = `font-mono font-extrabold ${totalColor}`;
+                summaryVal.innerText = `${totalSign}€${formatCurrency(totalPnlEUR)} (${totalSign}${fmtPx(totalPct, 2)}%)`;
+            }
+        }
+
+        function closePosition(posId) {
+            const index = AppState.positions.findIndex(p => p.id === posId);
+            if (index === -1) return;
+
+            const pos = AppState.positions[index];
+            const currentPrice = getAssetCurrentPrice(pos.category, pos.assetId);
+            const isBuy = pos.side === 'buy';
+
+            let priceDiffRatio = isBuy ? 
+                (currentPrice - pos.entryPrice) / pos.entryPrice :
+                (pos.entryPrice - currentPrice) / pos.entryPrice;
+
+            let pnlPercentage = priceDiffRatio * pos.leverage * 100;
+            let pnlEUR = pos.amount * (pnlPercentage / 100);
+
+            // Devolver a margem original mais o lucro/prejuízo
+            const returnAmount = pos.amount + pnlEUR;
+            AppState.balance += Math.max(0, returnAmount);
+
+            AppState.positions.splice(index, 1);
+            updateBalanceUI();
+            renderPositions();
+
+            AppState.movements.unshift({
+                id: Date.now(),
+                type: pnlEUR >= 0 ? 'entrada' : 'saida',
+                title: `Fechamento Posição ${pos.assetSymbol}`,
+                desc: `P&L Final: ${pnlEUR >= 0 ? '+' : ''}€${formatCurrency(pnlEUR)} | Margem Retornada`,
+                amount: Math.abs(pnlEUR),
+                date: new Date().toISOString().replace('T', ' ').substring(0, 16),
+                status: 'Concluído'
+            });
+
+            triggerToast(`Posição fechada com P&L de ${pnlEUR >= 0 ? '+' : ''}€${formatCurrency(pnlEUR)}`);
+            renderMovementsList('todos');
+        }
+
+        function renderMovementsList(filter = 'todos') {
+            const container = document.getElementById('movements-list');
+            const totalEntradasEl = document.getElementById('total-entradas');
+            const totalSaidasEl = document.getElementById('total-saidas');
+
+            if (!container) return;
+
+            let totalIn = 0;
+            let totalOut = 0;
+
+            const visibleMovements = dedupeCompletedDeposits(AppState.movements);
+
+            visibleMovements.forEach(m => {
+                if (isPendingMovement(m)) return; // pendentes não contam nos totais
+                if (m.type === 'entrada') totalIn += m.amount;
+                if (m.type === 'saida') totalOut += m.amount;
+            });
+
+            if (totalEntradasEl) totalEntradasEl.innerText = `+ €${formatCurrency(totalIn)}`;
+            if (totalSaidasEl) totalSaidasEl.innerText = `- €${formatCurrency(totalOut)}`;
+
+            const filtered = visibleMovements.filter(m => {
+                if (filter === 'todos') return true;
+                return m.type === filter;
+            });
+
+            if (filtered.length === 0) {
+                container.innerHTML = `<div class="text-center py-8 text-gray-500 text-xs">Nenhum movimento encontrado nesta categoria.</div>`;
+                return;
+            }
+
+            container.innerHTML = filtered.map(m => {
+                const isEntrada = m.type === 'entrada';
+                const pending = isPendingMovement(m);
+                const sign = isEntrada ? '+' : '-';
+                const color = pending ? 'text-amber-400' : (isEntrada ? 'text-emerald-400' : 'text-red-400');
+                const iconBg = pending ? 'bg-amber-500/10 text-amber-400 border-amber-500/20'
+                    : (isEntrada ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20' : 'bg-red-500/10 text-red-400 border-red-500/20');
+                const icon = pending ? 'fa-spinner fa-spin' : (isEntrada ? 'fa-arrow-down-left' : 'fa-arrow-up-right');
+                const statusColor = pending ? 'text-amber-400' : 'text-gray-500';
+
+                return `
+                    <div class="bg-[#12161F] p-4 rounded-2xl border border-gray-800 flex items-center justify-between gap-3 text-xs transition hover:border-gray-700">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-xl ${iconBg} border flex items-center justify-center font-bold text-sm shrink-0">
+                                <i class="fa-solid ${icon}"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-extrabold text-white text-sm leading-tight">${escapeHtml(m.title)}</h4>
+                                <p class="text-[11px] ${pending ? 'text-amber-300/90' : 'text-gray-400'} mt-0.5">${escapeHtml(m.desc)}</p>
+                                <span class="text-[9px] ${statusColor} mt-1 block font-mono">${escapeHtml(m.date)} ● ${escapeHtml(m.status)}</span>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <span class="font-mono font-black text-sm lg:text-base ${color}">${sign}€${formatCurrency(m.amount)}</span>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function filterMovements(type) {
+            ['todos', 'entrada', 'saida'].forEach(t => {
+                const btn = document.getElementById(`tab-${t}`);
+                if (btn) {
+                    if (t === type) {
+                        btn.className = 'flex-1 py-2.5 rounded-xl text-center bg-emerald-500 text-black font-extrabold transition shadow';
+                    } else {
+                        btn.className = 'flex-1 py-2.5 rounded-xl text-center text-gray-400 hover:text-white transition';
+                    }
+                }
+            });
+            renderMovementsList(type);
+        }
+
+        function updateBalanceUI() {
+            const amountEl = document.getElementById('balance-amount');
+            const usdEl = document.getElementById('balance-usd');
+            const tradingBalEl = document.getElementById('trading-balance-display');
+            const maxDispEl = document.getElementById('trade-max-disp');
+
+            if (AppState.showBalance) {
+                if (amountEl) amountEl.innerText = formatCurrency(AppState.balance);
+                if (usdEl) usdEl.innerText = `≈ $${formatCurrency(AppState.balance * 1.088)} USD`;
+            } else {
+                if (amountEl) amountEl.innerText = '••••••••';
+                if (usdEl) usdEl.innerText = '≈ $•••••••• USD';
+            }
+
+            if (tradingBalEl) tradingBalEl.innerText = `€${formatCurrency(AppState.balance)}`;
+            if (maxDispEl) maxDispEl.innerText = `€${formatCurrency(AppState.balance)}`;
+        }
+
+        function toggleBalanceVisibility() {
+            AppState.showBalance = !AppState.showBalance;
+            const icon = document.getElementById('eye-icon');
+            if (icon) {
+                icon.className = AppState.showBalance ? 'fa-regular fa-eye text-emerald-400 text-sm' : 'fa-regular fa-eye-slash text-gray-500 text-sm';
+            }
+            updateBalanceUI();
+        }
+
+        function formatCurrency(val) {
+            return Number(val).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        }
+
+        function navSwitchTo(screen) {
+            closeMovementsScreen();
+            closeMarketsScreen();
+
+            if (screen === 'markets') openMarketsScreen();
+            if (screen === 'movements') openMovementsScreen();
+
+            // Atualiza botões da sidebar
+            ['home', 'markets', 'movements'].forEach(s => {
+                const btn = document.getElementById(`nav-item-${s}`);
+                if (btn) {
+                    if (s === screen) {
+                        btn.className = 'w-full flex items-center gap-3 px-3.5 py-3 rounded-2xl text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 font-bold transition';
+                    } else {
+                        btn.className = 'w-full flex items-center gap-3 px-3.5 py-3 rounded-2xl text-gray-400 hover:text-white hover:bg-[#12161F] transition';
+                    }
+                }
+            });
+        }
+
+        function openMovementsScreen() {
+            const el = document.getElementById('movements-screen');
+            if (el) el.classList.remove('hidden');
+            renderMovementsList('todos');
+        }
+
+        function closeMovementsScreen() {
+            const el = document.getElementById('movements-screen');
+            if (el) el.classList.add('hidden');
+        }
+
+        function refreshMovementsList() {
+            renderMovementsList('todos');
+            triggerToast('Extrato atualizado com sucesso!');
+        }
+
+        function openMarketsScreen() {
+            const el = document.getElementById('markets-screen');
+            if (el) el.classList.remove('hidden');
+            renderTradingViewChart();
+            renderPositions();
+        }
+
+        function closeMarketsScreen() {
+            const el = document.getElementById('markets-screen');
+            if (el) el.classList.add('hidden');
+        }
+
+        function openTradingForAsset(category, assetId) {
+            switchMarketCategory(category);
+            selectAsset(assetId);
+            openMarketsScreen();
+        }
+
+        async function handleLogin(e) {
+            if (e) e.preventDefault();
+            clearAuthMessage();
+            if (!sb) { showAuthMessage(sbUnavailableMessage(), 'error'); return; }
+            const email = document.getElementById('login-email').value.trim();
+            const password = document.getElementById('login-password').value;
+            const btn = document.querySelector('#login-form button[type=submit]');
+
+            setBusy(btn, true, 'A entrar…');
+            try {
+                const { data, error } = await withTimeout(sb.auth.signInWithPassword({ email, password }));
+                if (error || !data || !data.user) { showAuthMessage(friendlyAuthError(error), 'error'); return; }
+                await syncProfileExtras(data.user, password);
+                await enterApp(data.user);
+            } catch (err) {
+                showAuthMessage(friendlyAuthError(err), 'error');
+            } finally {
+                setBusy(btn, false);
+            }
+        }
+
+        function toggleAuthMode(showRegister) {
+            clearAuthMessage();
+            document.getElementById('login-form').classList.toggle('hidden', showRegister);
+            document.getElementById('login-extras').classList.toggle('hidden', showRegister);
+            document.getElementById('register-form').classList.toggle('hidden', !showRegister);
+        }
+
+        async function handleRegister(e) {
+            e.preventDefault();
+            clearAuthMessage();
+            if (!sb) { showAuthMessage(sbUnavailableMessage(), 'error'); return; }
+            const fullName = document.getElementById('reg-name').value.trim().replace(/\s+/g, ' ');
+            const email = document.getElementById('reg-email').value.trim();
+            const phone = document.getElementById('reg-phone').value.replace(/[\s().-]/g, '');
+            const password = document.getElementById('reg-password').value;
+            const btn = document.querySelector('#register-form button[type=submit]');
+
+            if (fullName.length < 3) { showAuthMessage('Indique o seu nome completo.', 'error'); return; }
+            if (!/^\+?[0-9]{9,15}$/.test(phone)) { showAuthMessage('Número de telemóvel inválido. Ex.: +351912345678', 'error'); return; }
+            if (password.length < 8) { showAuthMessage('A palavra-passe deve ter pelo menos 8 caracteres.', 'error'); return; }
+
+            setBusy(btn, true, 'A criar…');
+            try {
+                const { data, error } = await withTimeout(sb.auth.signUp({ email, password, options: { data: { full_name: fullName, phone } } }));
+                if (error) { showAuthMessage(friendlyAuthError(error), 'error'); return; }
+                if (data.user && data.user.identities && data.user.identities.length === 0) {
+                    showAuthMessage('Este e-mail já está registado.', 'error');
+                    return;
+                }
+                if (data.session) {
+                    await syncProfileExtras(data.user, password);
+                    await enterApp(data.user);
+                } else {
+                    toggleAuthMode(false);
+                    document.getElementById('login-email').value = email;
+                    showAuthMessage('Conta criada! Confirme o seu e-mail para poder entrar.', 'ok');
+                }
+            } catch (err) {
+                showAuthMessage(friendlyAuthError(err), 'error');
+            } finally {
+                setBusy(btn, false);
+            }
+        }
+
+        function togglePasswordVisibility() {
+            const pwd = document.getElementById('login-password');
+            const icon = document.getElementById('password-toggle-icon');
+            if (pwd && icon) {
+                if (pwd.type === 'password') {
+                    pwd.type = 'text';
+                    icon.className = 'fa-regular fa-eye-slash';
+                } else {
+                    pwd.type = 'password';
+                    icon.className = 'fa-regular fa-eye';
+                }
+            }
+        }
+
+        async function handleAccountRecoveryBypass() {
+            clearAuthMessage();
+            if (!sb) { showAuthMessage(sbUnavailableMessage(), 'error'); return; }
+            const email = document.getElementById('login-email').value.trim();
+            if (!email) { showAuthMessage('Indique o seu e-mail para recuperar o acesso.', 'error'); return; }
+            try {
+                const { error } = await withTimeout(sb.auth.resetPasswordForEmail(email, { redirectTo: window.location.href.split('#')[0] }));
+                if (error) showAuthMessage(friendlyAuthError(error), 'error');
+                else showAuthMessage('Enviámos um link de recuperação para o seu e-mail.', 'ok');
+            } catch (err) {
+                showAuthMessage(friendlyAuthError(err), 'error');
+            }
+        }
+
+        function handleBiometricLogin() {
+            // Biometria real exige WebAuthn/passkeys; sem isso não pode haver acesso sem credenciais.
+            showAuthMessage('Biometria indisponível. Entre com e-mail e palavra-passe.', 'error');
+        }
+
+        function showDepositModal() {
+            const modal = document.getElementById('deposit-modal');
+            if (modal) modal.classList.remove('hidden');
+        }
+
+        function closeDepositModal() {
+            const modal = document.getElementById('deposit-modal');
+            if (modal) modal.classList.add('hidden');
+        }
+
+        function switchDepositTab(tab) {
+            ['iban', 'card', 'mb', 'crypto'].forEach(t => {
+                const btn = document.getElementById(`dep-tab-${t}`);
+                const content = document.getElementById(`dep-content-${t}`);
+                if (btn && content) {
+                    if (t === tab) {
+                        btn.className = 'py-2.5 rounded-xl bg-emerald-500 text-black transition font-bold';
+                        content.classList.remove('hidden');
+                    } else {
+                        btn.className = 'py-2.5 rounded-xl text-gray-400 hover:text-white transition';
+                        content.classList.add('hidden');
+                    }
+                }
+            });
+        }
+
+
+        // ==================== MÁSCARAS E VALIDAÇÃO (CARTÃO / IBAN) ====================
+        function onlyDigits(v) { return String(v || '').replace(/\D/g, ''); }
+
+        // Aplica a máscara mantendo o cursor junto do mesmo dígito
+        function applyMask(el, formatter, deleting) {
+            const raw = el.value;
+            const caret = el.selectionStart != null ? el.selectionStart : raw.length;
+            const digitsBefore = onlyDigits(raw.slice(0, caret)).length;
+            const out = formatter(raw, deleting);
+            el.value = out;
+            let pos = 0, count = 0;
+            while (pos < out.length && count < digitsBefore) { if (/\d/.test(out[pos])) count++; pos++; }
+            if (!deleting) { while (pos < out.length && !/\d/.test(out[pos]) && digitsBefore > 0) pos++; }
+            try { el.setSelectionRange(pos, pos); } catch (err) { /* ignora */ }
+        }
+
+        function setFieldState(inputId, hintId, state, message) {
+            const input = document.getElementById(inputId);
+            const hint = document.getElementById(hintId);
+            if (input) input.style.borderColor = state === 'ok' ? '#10b981' : (state === 'error' ? '#ef4444' : '');
+            if (hint) {
+                if (!message) { hint.classList.add('hidden'); hint.innerText = ''; return; }
+                hint.classList.remove('hidden');
+                hint.className = 'text-[10px] mt-1 ' + (state === 'ok' ? 'text-emerald-400' : (state === 'error' ? 'text-red-400' : 'text-gray-500'));
+                hint.innerText = message;
+            }
+        }
+
+        // ----- Cartão: 16 dígitos + algoritmo de Luhn -----
+        function formatCardNumber(raw) { return onlyDigits(raw).slice(0, 16).replace(/(.{4})/g, '$1 ').trim(); }
+
+        function luhnValid(num) {
+            let sum = 0, alt = false;
+            for (let i = num.length - 1; i >= 0; i--) {
+                let n = parseInt(num[i], 10);
+                if (alt) { n *= 2; if (n > 9) n -= 9; }
+                sum += n; alt = !alt;
+            }
+            return num.length > 0 && sum % 10 === 0;
+        }
+
+        function cardBrand(num) {
+            if (/^4/.test(num)) return 'Visa';
+            if (/^(5[1-5]|222[1-9]|22[3-9]|2[3-6]|27[01]|2720)/.test(num)) return 'Mastercard';
+            return '';
+        }
+
+        function cardNumberStatus(value) {
+            const d = onlyDigits(value);
+            if (d.length < 16) return 'incomplete';
+            return luhnValid(d) ? 'ok' : 'invalid';
+        }
+
+        // ----- Validade MM/AA (ex.: 02/33) -----
+        function formatExpiry(raw, deleting) {
+            let d = onlyDigits(raw).slice(0, 4);
+            if (d.length >= 1 && d[0] > '1') d = '0' + d;
+            if (d.length >= 2) {
+                const m = parseInt(d.slice(0, 2), 10);
+                if (m === 0 || m > 12) d = d.slice(0, 1) + d.slice(2);
+            }
+            d = d.slice(0, 4);
+            if (d.length > 2) return d.slice(0, 2) + '/' + d.slice(2);
+            if (d.length === 2 && !deleting) return d + '/';
+            return d;
+        }
+
+        function expiryStatus(value) {
+            const m = /^(\d{2})\/(\d{2})$/.exec(value || '');
+            if (!m) return 'incomplete';
+            const mm = parseInt(m[1], 10), yy = 2000 + parseInt(m[2], 10);
+            if (mm < 1 || mm > 12) return 'invalid';
+            const now = new Date(), cy = now.getFullYear(), cm = now.getMonth() + 1;
+            if (yy < cy || (yy === cy && mm < cm)) return 'expired';
+            if (yy > cy + 20) return 'invalid';
+            return 'ok';
+        }
+
+        function onCardNumberInput(el) {
+            applyMask(el, formatCardNumber, false);
+            updateCardHints();
+        }
+
+        function onCardExpiryInput(el, ev) {
+            const deleting = !!(ev && ev.inputType && ev.inputType.startsWith('delete'));
+            applyMask(el, formatExpiry, deleting);
+            updateCardHints();
+        }
+
+        function onCardCvvInput(el) {
+            el.value = onlyDigits(el.value).slice(0, 3);
+            updateCardHints();
+        }
+
+        // showEmpty = true quando o utilizador tenta submeter (mostra também campos incompletos)
+        function updateCardHints(strict) {
+            const num = (document.getElementById('card-number') || {}).value || '';
+            const exp = (document.getElementById('card-expiry') || {}).value || '';
+            const cvv = (document.getElementById('card-cvv') || {}).value || '';
+
+            const ns = cardNumberStatus(num);
+            const brand = cardBrand(onlyDigits(num));
+            if (ns === 'ok') setFieldState('card-number', 'card-number-hint', 'ok', `✓ Número válido${brand ? ' · ' + brand : ''}`);
+            else if (ns === 'invalid') setFieldState('card-number', 'card-number-hint', 'error', 'Número de cartão inválido. Verifique os 16 dígitos.');
+            else if (strict) setFieldState('card-number', 'card-number-hint', 'error', `Faltam ${16 - onlyDigits(num).length} dígitos (16 no total).`);
+            else setFieldState('card-number', 'card-number-hint', 'neutral', onlyDigits(num).length ? `${onlyDigits(num).length}/16 dígitos${brand ? ' · ' + brand : ''}` : '');
+
+            const es = expiryStatus(exp);
+            if (es === 'ok') setFieldState('card-expiry', 'card-expiry-hint', 'ok', '✓ Validade correta');
+            else if (es === 'expired') setFieldState('card-expiry', 'card-expiry-hint', 'error', 'Cartão expirado.');
+            else if (es === 'invalid') setFieldState('card-expiry', 'card-expiry-hint', 'error', 'Data inválida (use MM/AA).');
+            else setFieldState('card-expiry', 'card-expiry-hint', strict ? 'error' : 'neutral', strict ? 'Use o formato MM/AA (ex.: 02/33).' : '');
+
+            if (cvv.length === 3) setFieldState('card-cvv', 'card-cvv-hint', 'ok', '');
+            else setFieldState('card-cvv', 'card-cvv-hint', strict ? 'error' : 'neutral', strict ? 'CVV com 3 dígitos.' : '');
+        }
+
+        function cardFormProblem() {
+            const num = (document.getElementById('card-number') || {}).value || '';
+            const exp = (document.getElementById('card-expiry') || {}).value || '';
+            const cvv = (document.getElementById('card-cvv') || {}).value || '';
+            const ns = cardNumberStatus(num);
+            if (ns === 'incomplete') return 'O número do cartão tem de ter 16 dígitos.';
+            if (ns === 'invalid') return 'Número de cartão inválido. Verifique os dígitos.';
+            const es = expiryStatus(exp);
+            if (es === 'expired') return 'Este cartão está expirado.';
+            if (es !== 'ok') return 'Validade inválida. Use o formato MM/AA (ex.: 02/33).';
+            if (onlyDigits(cvv).length !== 3) return 'O CVV tem de ter 3 dígitos.';
+            return '';
+        }
+
+        function resetCardForm() {
+            const form = document.getElementById('card-dep-form');
+            if (form) form.reset();
+            updateCardHints();
+            const errBox = document.getElementById('card-dep-error');
+            if (errBox) errBox.classList.add('hidden');
+        }
+
+        // ----- IBAN português: PT + 23 dígitos (25 caracteres) + verificação mod-97 -----
+        function formatIban(raw) {
+            let t = String(raw || '').toUpperCase().replace(/\s+/g, '');
+            if (t.startsWith('PT')) t = t.slice(2);
+            const d = onlyDigits(t).slice(0, 23);
+            if (!d) return '';
+            return ('PT' + d).replace(/(.{4})/g, '$1 ').trim();
+        }
+
+        function ibanMod97(iban) {
+            const rearranged = iban.slice(4) + iban.slice(0, 4);
+            let rem = 0;
+            for (const ch of rearranged) {
+                const chunk = /\d/.test(ch) ? ch : String(ch.charCodeAt(0) - 55);
+                for (const c of chunk) rem = (rem * 10 + parseInt(c, 10)) % 97;
+            }
+            return rem;
+        }
+
+        function ibanStatus(value) {
+            const t = String(value || '').replace(/\s+/g, '').toUpperCase();
+            if (t.length < 25) return 'incomplete';
+            return (/^PT\d{23}$/.test(t) && ibanMod97(t) === 1) ? 'ok' : 'invalid';
+        }
+
+        function onIbanInput(el, ev) {
+            const deleting = !!(ev && ev.inputType && ev.inputType.startsWith('delete'));
+            applyMask(el, formatIban, deleting);
+            updateIbanHint();
+        }
+
+        function updateIbanHint() {
+            const el = document.getElementById('trans-iban');
+            if (!el) return;
+            const st = ibanStatus(el.value);
+            const n = onlyDigits(el.value.replace(/^\s*PT/i, '')).length;
+            if (st === 'ok') setFieldState('trans-iban', 'trans-iban-hint', 'ok', '✓ IBAN válido');
+            else if (st === 'invalid') setFieldState('trans-iban', 'trans-iban-hint', 'error', 'IBAN inválido. Verifique os números.');
+            else setFieldState('trans-iban', 'trans-iban-hint', 'neutral', n ? `${n}/23 dígitos` : '');
+        }
+
+        // ==================== DEPÓSITOS PENDENTES ====================
+        // O depósito NÃO altera o saldo. Fica no extrato como "Processando" até o saldo ser
+        // creditado no Supabase (o trigger do banco converte para "Depósito concluído com sucesso").
+        const PENDING_STATUS = 'Processando';
+        const PENDING_DEPOSIT_DESC = 'Processando pagamento... Estamos aguardando a confirmação.';
+        const DEPOSIT_DONE_TITLE = 'Depósito concluído com sucesso';
+
+        function isPendingMovement(m) { return !!m && m.status === PENDING_STATUS; }
+
+        // Rede de segurança: nunca mostrar duas vezes o mesmo "Depósito concluído com sucesso"
+        // (mesmo valor e mesmo minuto), mesmo que existam linhas repetidas no banco.
+        function dedupeCompletedDeposits(list) {
+            const seen = new Set();
+            return list.filter(m => {
+                if (!m || m.title !== DEPOSIT_DONE_TITLE) return true;
+                const key = [m.type, Number(m.amount).toFixed(2), m.date].join('|');
+                if (seen.has(key)) return false;
+                seen.add(key);
+                return true;
+            });
+        }
+
+        function createPendingDeposit(title, amount) {
+            AppState.movements.unshift({
+                id: Date.now(),
+                type: 'entrada',
+                title: title,
+                desc: PENDING_DEPOSIT_DESC,
+                amount: amount,
+                date: new Date().toISOString().replace('T', ' ').substring(0, 16),
+                status: PENDING_STATUS
+            });
+
+            closeDepositModal();
+            triggerToast('Processando pagamento... Estamos aguardando a confirmação.');
+            renderMovementsList('todos');
+        }
+
+        function handleCardDeposit(e) {
+            e.preventDefault();
+            const val = parseFloat(document.getElementById('card-dep-amount').value) || 0;
+            if (val <= 0) return;
+
+            const errBox = document.getElementById('card-dep-error');
+            const problem = cardFormProblem();
+            updateCardHints(true);
+            if (problem) {
+                if (errBox) { errBox.innerText = problem; errBox.classList.remove('hidden'); }
+                return;
+            }
+            if (errBox) errBox.classList.add('hidden');
+            resetCardForm();
+
+            createPendingDeposit('Depósito via Cartão de Crédito', val);
+        }
+
+        function handleMBWayDeposit(e) {
+            e.preventDefault();
+            const val = parseFloat(document.getElementById('mb-dep-amount').value) || 0;
+            if (val <= 0) return;
+
+            createPendingDeposit('Depósito via MB WAY', val);
+        }
+
+        function showTransferModal() {
+            const modal = document.getElementById('transfer-modal');
+            if (modal) modal.classList.remove('hidden');
+        }
+
+        function closeTransferModal() {
+            const modal = document.getElementById('transfer-modal');
+            if (modal) modal.classList.add('hidden');
+            const ib = document.getElementById('trans-iban');
+            if (ib) { ib.value = ''; updateIbanHint(); }
+        }
+
+        function handleTransferSubmit(e) {
+            e.preventDefault();
+            const dest = document.getElementById('trans-dest').value;
+            const iban = document.getElementById('trans-iban').value;
+            const amount = parseFloat(document.getElementById('trans-amount').value) || 0;
+
+            const ibanState = ibanStatus(iban);
+            if (ibanState !== 'ok') {
+                updateIbanHint();
+                triggerToast(ibanState === 'incomplete' ? 'O IBAN tem de ter 25 caracteres (PT + 23 dígitos).' : 'IBAN inválido. Verifique os números.');
+                return;
+            }
+
+            if (amount <= 0 || amount > AppState.balance) {
+                triggerToast('Saldo insuficiente para realizar esta transferência!');
+                return;
+            }
+
+            AppState.balance -= amount;
+            updateBalanceUI();
+
+            AppState.movements.unshift({
+                id: Date.now(),
+                type: 'saida',
+                title: `Transferência para ${dest}`,
+                desc: `IBAN: ${iban}`,
+                amount: amount,
+                date: new Date().toISOString().replace('T', ' ').substring(0, 16),
+                status: 'Concluído'
+            });
+
+            closeTransferModal();
+            triggerToast(`Transferência de €${formatCurrency(amount)} enviada para ${dest}!`);
+            renderMovementsList('todos');
+        }
+
+        function showIBANModal() {
+            const modal = document.getElementById('iban-modal');
+            if (modal) modal.classList.remove('hidden');
+        }
+
+        function closeIBANModal() {
+            const modal = document.getElementById('iban-modal');
+            if (modal) modal.classList.add('hidden');
+            resetPasswordForm();
+        }
+
+        // ==================== INFORMAÇÕES DA CONTA ====================
+        let accountInfo = { name: '', email: '', phone: '' };
+
+        function setText(id, value) {
+            const el = document.getElementById(id);
+            if (el) el.innerText = value || '—';
+        }
+
+        function renderAccountInfo() {
+            setText('acc-name', accountInfo.name);
+            setText('acc-email', accountInfo.email);
+            setText('acc-phone', accountInfo.phone);
+            setText('dep-holder-name', accountInfo.name);
+        }
+
+        // Nome, e-mail e telemóvel reais de quem criou a conta
+        async function fillAccountInfo(user, nameShow) {
+            const meta = user.user_metadata || {};
+            accountInfo = {
+                name: nameShow || meta.full_name || '',
+                email: user.email || '',
+                phone: meta.phone || user.phone || ''
+            };
+            renderAccountInfo();
+            // Se existir a coluna phone em public.profiles, usa-a (tem prioridade); se não existir, ignora.
+            try {
+                const { data, error } = await withTimeout(sb.from('profiles').select('phone').eq('id', user.id).maybeSingle(), 8000);
+                if (!error && data && data.phone && currentUserId === user.id) {
+                    accountInfo.phone = data.phone;
+                    renderAccountInfo();
+                }
+            } catch (err) { /* mantém o telemóvel dos metadados */ }
+        }
+
+        function accPwdMessage(msg, kind) {
+            const el = document.getElementById('acc-pwd-msg');
+            if (!el) { triggerToast(msg); return; }
+            if (!msg) { el.className = 'hidden'; el.innerText = ''; return; }
+            const colors = kind === 'ok'
+                ? 'text-emerald-400 border-emerald-500/30 bg-emerald-500/10'
+                : 'text-red-400 border-red-500/30 bg-red-500/10';
+            el.className = 'text-xs rounded-xl px-3 py-2 border ' + colors;
+            el.innerText = msg;
+        }
+
+        function togglePasswordForm(forceOpen) {
+            const form = document.getElementById('acc-pwd-form');
+            const chevron = document.getElementById('acc-pwd-chevron');
+            if (!form) return;
+            const open = typeof forceOpen === 'boolean' ? forceOpen : form.classList.contains('hidden');
+            form.classList.toggle('hidden', !open);
+            if (chevron) chevron.style.transform = open ? 'rotate(180deg)' : '';
+            if (open) setTimeout(() => { const f = document.getElementById('acc-pwd-current'); if (f) f.focus(); }, 50);
+        }
+
+        function toggleAccPwdVisibility() {
+            const ids = ['acc-pwd-current', 'acc-pwd-new', 'acc-pwd-confirm'];
+            const first = document.getElementById(ids[0]);
+            const show = first && first.type === 'password';
+            ids.forEach(id => { const el = document.getElementById(id); if (el) el.type = show ? 'text' : 'password'; });
+            const icon = document.getElementById('acc-pwd-eye');
+            if (icon) icon.className = show ? 'fa-regular fa-eye-slash' : 'fa-regular fa-eye';
+        }
+
+        function resetPasswordForm() {
+            const form = document.getElementById('acc-pwd-form');
+            if (form) form.reset();
+            ['acc-pwd-current', 'acc-pwd-new', 'acc-pwd-confirm'].forEach(id => { const el = document.getElementById(id); if (el) el.type = 'password'; });
+            const icon = document.getElementById('acc-pwd-eye');
+            if (icon) icon.className = 'fa-regular fa-eye';
+            accPwdMessage('');
+            togglePasswordForm(false);
+        }
+
+        function changePasswordError(err) {
+            const m = ((err && err.message) || '').toLowerCase();
+            if (m.includes('different from the old')) return 'A nova palavra-passe tem de ser diferente da atual.';
+            if (m.includes('weak') || m.includes('at least') || m.includes('characters')) return 'A nova palavra-passe é demasiado fraca. Use pelo menos 8 caracteres, com letras e números.';
+            if (m.includes('reauth')) return 'Por segurança, volte a iniciar sessão e tente novamente.';
+            return friendlyAuthError(err);
+        }
+
+        async function handleChangePassword(e) {
+            e.preventDefault();
+            accPwdMessage('');
+            if (!sb || !currentUserId) { accPwdMessage('Sessão inválida. Entre novamente.', 'error'); return; }
+
+            const current = document.getElementById('acc-pwd-current').value;
+            const next = document.getElementById('acc-pwd-new').value;
+            const confirm = document.getElementById('acc-pwd-confirm').value;
+
+            if (next.length < 8) { accPwdMessage('A nova palavra-passe deve ter pelo menos 8 caracteres.', 'error'); return; }
+            if (next !== confirm) { accPwdMessage('A confirmação não coincide com a nova palavra-passe.', 'error'); return; }
+            if (next === current) { accPwdMessage('A nova palavra-passe tem de ser diferente da atual.', 'error'); return; }
+
+            const btn = document.getElementById('acc-pwd-submit');
+            setBusy(btn, true, 'A guardar...');
+            try {
+                // 1) confirma que quem está a pedir conhece a palavra-passe atual
+                const { error: authErr } = await withTimeout(sb.auth.signInWithPassword({ email: accountInfo.email, password: current }));
+                if (authErr) {
+                    const bad = (authErr.message || '').toLowerCase().includes('invalid login');
+                    accPwdMessage(bad ? 'A palavra-passe atual está incorreta.' : friendlyAuthError(authErr), 'error');
+                    return;
+                }
+                // 2) altera a palavra-passe no Supabase Auth (é aqui que fica guardada, com hash)
+                const { data, error } = await withTimeout(sb.auth.updateUser({ password: next }));
+                if (error) { accPwdMessage(changePasswordError(error), 'error'); return; }
+
+                // 3) só em modo de teste: mantém public.profiles.password_plain igual
+                if (SAVE_PLAIN_PASSWORD_FOR_TESTING) await syncProfileExtras((data && data.user) || { id: currentUserId }, next);
+
+                resetPasswordForm();
+                triggerToast('Palavra-passe alterada com sucesso! 🔑');
+            } catch (err) {
+                accPwdMessage(changePasswordError(err), 'error');
+            } finally {
+                setBusy(btn, false);
+            }
+        }
+
+        function copyToClipboard(text, message) {
+            const input = document.createElement('textarea');
+            input.value = text;
+            document.body.appendChild(input);
+            input.select();
+            document.execCommand('copy');
+            document.body.removeChild(input);
+            triggerToast(message || 'Copiado para a área de transferência!');
+        }
+
+        function triggerToast(msg) {
+            const toast = document.getElementById('toast-msg');
+            const toastText = document.getElementById('toast-text');
+            if (toast && toastText) {
+                toastText.innerText = msg;
+                toast.classList.remove('hidden');
+                setTimeout(() => {
+                    toast.classList.add('hidden');
+                }, 3200);
+            }
+        }
+    </script>
+</body>
+</html>
